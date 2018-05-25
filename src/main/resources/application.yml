@@ -4,15 +4,24 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
+server:
+    port: 7092
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.lrz.modelmpl
   configuration:
-    #控制台打印sql
+    # 鎵撳嵃sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-#pagehelper分页插件STDOUT_LOGGING
+#pagehelper STDOUT_LOGGING
 pagehelper:
   helperDialect: mysql
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+wechat:
+  miniapp:
+    appid: wxe22a8310f6aadeff
+    secret: 59905f459f4a80a163733dceecfcbe35
+    token: 111
+    aesKey: 111
+    msgDataFormat: JSON

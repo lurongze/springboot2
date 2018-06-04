@@ -1,8 +1,7 @@
 package com.lrz.controller;
 
-import com.lrz.utils.Result;
-import com.lrz.utils.Response;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class IndexController extends BaseController{
     @GetMapping("/index")
-    public Result index() {
-        return Response.success("list-action");
+    public String index() {
+        return "list-action";
+    }
+
+    @PostMapping("/post")
+    public String post() {
+        return "test-interceptor";
+    }
+
+    @GetMapping("/test-init")
+    public String testInit() {
+        System.out.println("authSession:" + this.authSession);
+        return this.authSession;
     }
 }

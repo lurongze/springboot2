@@ -1,9 +1,8 @@
 package com.lrz.config;
 
-import com.lrz.service.MiniappService;
+import com.sun.xml.internal.fastinfoset.stax.events.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -17,8 +16,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Configuration
 public class TokenInterceptor implements WebMvcConfigurer {
-    @Autowired
-    MiniappService miniappService;
     private final Logger logger = LoggerFactory.getLogger(TokenInterceptor.class);
     @Override
     public void addInterceptors (InterceptorRegistry registry) {
@@ -26,12 +23,20 @@ public class TokenInterceptor implements WebMvcConfigurer {
             @Override
             public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
             String URI = request.getRequestURI();
-            if(URI.startsWith("/mp")){ // 小程序的API
-                if(request.getMethod().toUpperCase().equals("GET")) { // GET请求不验证，要验证的都使用post，put等请求
+            logger.info("进入拦截器");
+            if(URI.startsWith("/")){ // 小程序的API
+                String method = request.getMethod().toUpperCase();
+                logger.info("请求的method:" + method);
+                if("GET".equals(method) || "OPTIONS".equals(method)) { // GET请求不验证，要验证的都使用post，put等请求
                     return true;
                 }else{
-                    if(!miniappService.checkSession(request.getHeader("authorization"))){
-                        throw new RuntimeException("authorization miss");
+                    String authorization = request.getHeader("authorization");
+                    if(Util.isEmptyString(authorization)){
+                        throw new RuntimeException("post请求必须要有authorization的header值");
+                    }else {
+                        if (authorization.length() < 10) {
+                            throw new RuntimeException("authorization错误");
+                        }
                     }
                 }
             }

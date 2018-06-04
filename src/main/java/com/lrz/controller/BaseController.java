@@ -2,6 +2,8 @@ package com.lrz.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,7 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 public class BaseController {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public String getSession(HttpServletRequest request) {
-        return request.getHeader("authorization");
+    protected String authSession;
+
+    @Autowired
+    HttpServletRequest httpServletRequest;
+    @ModelAttribute
+    void beforeEveryAction() {
+        this.authSession = "123";
+        System.out.println("beforeAction:" + httpServletRequest.getMethod());
     }
+
 }

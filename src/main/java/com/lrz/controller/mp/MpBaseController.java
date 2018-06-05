@@ -1,4 +1,4 @@
-package com.lrz.controller.admin;
+package com.lrz.controller.mp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by gz000172 on 2018/6/5.
- */
-public class AdminBaseController {
+public class MpBaseController {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     // 后台token认证
     protected String token;

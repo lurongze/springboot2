@@ -1,5 +1,6 @@
 package com.lrz.model;
 
+import java.util.Date;
 import javax.persistence.*;
 
 public class User {
@@ -7,11 +8,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+    @Column(name = "username")
+    private String username;
 
-    private String email;
+    @Column(name = "password")
+    private String password;
 
-    private String address;
+    @Column(name = "nick_name")
+    private String nickName;
+
+    private Integer sex;
+
+    @Column(name = "register_date")
+    private Date registerDate;
 
     /**
      * @return id
@@ -28,44 +37,72 @@ public class User {
     }
 
     /**
-     * @return name
+     * @return username
      */
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * @param name
+     * @param username
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
-     * @return email
+     * @return password
      */
-    public String getEmail() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * @param email
+     * @param password
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
-     * @return address
+     * @return nick_name
      */
-    public String getAddress() {
-        return address;
+    public String getNickName() {
+        return nickName;
     }
 
     /**
-     * @param address
+     * @param nickName
      */
-    public void setAddress(String address) {
-        this.address = address;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    /**
+     * @return sex
+     */
+    public Integer getSex() {
+        return sex;
+    }
+
+    /**
+     * @param sex
+     */
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    /**
+     * @return register_date
+     */
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    /**
+     * @param registerDate
+     */
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 }

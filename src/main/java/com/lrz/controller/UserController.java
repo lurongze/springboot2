@@ -1,4 +1,4 @@
-package com.lrz.web;
+package com.lrz.controller;
 import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
 import com.lrz.model.User;
@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Created by CodeGenerator on 2018/06/04.
+* Created by CodeGenerator on 2018/06/05.
 */
 @RestController
 @RequestMapping("/user")

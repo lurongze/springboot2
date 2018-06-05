@@ -4,7 +4,7 @@ import com.lrz.core.Service;
 
 
 /**
- * Created by CodeGenerator on 2018/06/04.
+ * Created by CodeGenerator on 2018/06/05.
  */
 public interface UserService extends Service<User> {
 

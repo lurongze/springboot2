@@ -124,7 +124,12 @@
 			<artifactId>weixin-java-open</artifactId>
 			<version>${weixin-java-open.version}</version>
 		</dependency>
-
+		<!--lombok依赖-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.18</version>
+		</dependency>
 	</dependencies>
 
 	<build>

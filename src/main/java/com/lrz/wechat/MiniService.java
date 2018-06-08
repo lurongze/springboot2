@@ -48,7 +48,7 @@ public class MiniService extends BaseService{
     }
 
     public String testGet() {
-        try{
+        try {
 
             Map<String, Object> params = new HashMap<>(8);
             params.put("name", "lurongze");
@@ -57,7 +57,6 @@ public class MiniService extends BaseService{
         } catch (Exception e) {
             return null;
         }
-
     }
 
 }

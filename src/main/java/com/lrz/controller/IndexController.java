@@ -38,6 +38,13 @@ public class IndexController extends BaseController{
         return "test-interceptor";
     }
 
+    @GetMapping("/test-get")
+    public String testGet() {
+        String getRes = miniService.testGet();
+        logger.info("getRes: " + getRes);
+        return "test-interceptor";
+    }
+
     @GetMapping("/test-init")
     public String testInit() {
         System.out.println("authSession:" + this.authSession);

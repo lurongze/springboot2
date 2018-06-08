@@ -1,5 +1,6 @@
 package com.lrz.wechat;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Joiner;
 import com.google.gson.JsonObject;
 import me.chanjar.weixin.common.exception.WxErrorException;
@@ -24,7 +25,7 @@ public class BaseService extends WxOpenServiceImpl {
         }
     }
 
-    public String HttpPost(String uri, JsonObject params) {
+    public String HttpPost(String uri, JSONObject params) {
         try {
             return this.post(uri, params.toString());
         }catch (WxErrorException e){

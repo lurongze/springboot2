@@ -9,14 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 
 public class MpBaseController {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    // 后台token认证
-    protected String token;
+    // 小程序sessionKey
+    protected String sessionKey;
+    protected String AppId;
+    protected String AppSecret;
     @Resource
     HttpServletRequest httpServletRequest;
     // 每个方法之前执行的方法
     @ModelAttribute
     void beforeActions() {
-        this.token = "123";
-        System.out.println("beforeAction:" + httpServletRequest.getMethod());
+        this.sessionKey = httpServletRequest.getHeader("authorization");
+        this.AppId = httpServletRequest.getHeader("appid");
+        this.AppSecret = "42c52740e810efbf5ce86e2356cba231";
     }
 }

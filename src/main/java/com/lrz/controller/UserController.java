@@ -1,4 +1,4 @@
-package com.lrz.web;
+package com.lrz.controller;
 
 import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;

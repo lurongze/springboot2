@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS `open_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `open_user` (
+  `appid` varchar(50) DEFAULT NULL,
   `openid` varchar(50) DEFAULT NULL,
   `session_key` varchar(50) NOT NULL,
   `wx_session` varchar(50) DEFAULT NULL,
@@ -38,7 +39,7 @@ CREATE TABLE `open_user` (
 
 LOCK TABLES `open_user` WRITE;
 /*!40000 ALTER TABLE `open_user` DISABLE KEYS */;
-INSERT INTO `open_user` VALUES ('oP_cK0TkMzc86uqhgBmWUq_OdPs8','EA152449ECC8F1B8AC5F6E9548FA2CA1','AhH6p/KESZS93IsIFyw8Jg==',NULL,NULL);
+INSERT INTO `open_user` VALUES ('wxe22a8310f6aadeff','oP_cK0TkMzc86uqhgBmWUq_OdPs8','2a654b110c9bc06eba1c5ed5ca0f0399','qSvdCIh4/1BekCDRvpQgxQ==',NULL,''),('wxe22a8310f6aadeff','oP_cK0TkMzc86uqhgBmWUq_OdPs8','a2b822e83414a90839b547a7d8ec3bd9','4mCNKDX0tRXfDmf9y7rb8A==',NULL,'');
 /*!40000 ALTER TABLE `open_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,11 +52,13 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `address` varchar(500) NOT NULL,
+  `user_name` varchar(100) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `user_address` varchar(500) NOT NULL,
+  `user_password` varchar(100) NOT NULL,
+  `created_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +67,6 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (27,'name2','1946755280@qq.com','广州市越秀区'),(2,'name','1946755280@qq.com','广州市'),(3,'name','1946755280@qq.com','广州市'),(4,'name','1946755280@qq.com','广州市'),(5,'name','1946755280@qq.com','广州市'),(6,'name','1946755280@qq.com','广州市'),(7,'name7','1946755280@qq.com','广州市'),(8,'name','1946755280@qq.com','广州市'),(9,'name','1946755280@qq.com','广州市'),(10,'name','1946755280@qq.com','广州市'),(11,'name','1946755280@qq.com','广州市'),(12,'name','1946755280@qq.com','广州市'),(13,'name','1946755280@qq.com','广州市'),(14,'name','1946755280@qq.com','广州市'),(15,'name','1946755280@qq.com','广州市'),(16,'name','1946755280@qq.com','广州市'),(17,'name','1946755280@qq.com','广州市'),(18,'name','1946755280@qq.com','广州市'),(19,'name','1946755280@qq.com','广州市'),(20,'name','1946755280@qq.com','广州市'),(21,'name','1946755280@qq.com','广州市'),(22,'name','1946755280@qq.com','广州市'),(23,'name','1946755280@qq.com','广州市'),(24,'name','1946755280@qq.com','广州市'),(25,'name','1946755280@qq.com','广州市'),(26,'name','1946755280@qq.com','广州市'),(28,'name','1946755280@qq.com','广州市'),(29,'name','1946755280@qq.com','广州市'),(30,'name','1946755280@qq.com','广州市'),(31,'name','1946755280@qq.com','广州市'),(32,'name','1946755280@qq.com','广州市'),(42,'lurongze','1946755280@qq.com','广州市'),(34,'name','1946755280@qq.com','广州市'),(35,'name','1946755280@qq.com','广州市'),(36,'name','1946755280@qq.com','广州市'),(37,'name','1946755280@qq.com','广州市'),(38,'name','1946755280@qq.com','广州市'),(39,'name','1946755280@qq.com','广州市'),(40,'name','1946755280@qq.com','广州市'),(41,'add陆荣泽','add 1946755280@qq.com','add 广州市'),(43,'name','1946755280@qq.com','广州市'),(44,'陆荣泽','1946755280@qq.com','广州市'),(45,'陆荣泽','1946755280@qq.com','广州市'),(46,'陆荣泽1','1946755280@qq.com','广州市'),(47,'name','1946755280@qq.com','广州市'),(48,'test-name','1946755280@qq.com','广州市'),(49,'nametest','1946755280@qq.com','广州市'),(50,'nametest','1946755280@qq.com','广州市'),(51,'nametest123','1946755280@qq.com','广州市');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-07 16:28:47
+-- Dump completed on 2018-06-12 16:27:25

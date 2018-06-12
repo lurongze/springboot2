@@ -1,6 +1,5 @@
 package com.lrz.model;
 
-import java.util.Date;
 import javax.persistence.*;
 
 public class User {
@@ -8,19 +7,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "user_name")
+    private String userName;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "user_email")
+    private String userEmail;
 
-    @Column(name = "nick_name")
-    private String nickName;
+    @Column(name = "user_address")
+    private String userAddress;
 
-    private Integer sex;
+    @Column(name = "user_password")
+    private String userPassword;
 
-    @Column(name = "register_date")
-    private Date registerDate;
+    @Column(name = "created_at")
+    private Integer createdAt;
 
     /**
      * @return id
@@ -37,72 +37,72 @@ public class User {
     }
 
     /**
-     * @return username
+     * @return user_name
      */
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
     /**
-     * @param username
+     * @param userName
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     /**
-     * @return password
+     * @return user_email
      */
-    public String getPassword() {
-        return password;
+    public String getUserEmail() {
+        return userEmail;
     }
 
     /**
-     * @param password
+     * @param userEmail
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     /**
-     * @return nick_name
+     * @return user_address
      */
-    public String getNickName() {
-        return nickName;
+    public String getUserAddress() {
+        return userAddress;
     }
 
     /**
-     * @param nickName
+     * @param userAddress
      */
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 
     /**
-     * @return sex
+     * @return user_password
      */
-    public Integer getSex() {
-        return sex;
+    public String getUserPassword() {
+        return userPassword;
     }
 
     /**
-     * @param sex
+     * @param userPassword
      */
-    public void setSex(Integer sex) {
-        this.sex = sex;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
     /**
-     * @return register_date
+     * @return created_at
      */
-    public Date getRegisterDate() {
-        return registerDate;
+    public Integer getCreatedAt() {
+        return createdAt;
     }
 
     /**
-     * @param registerDate
+     * @param createdAt
      */
-    public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
+    public void setCreatedAt(Integer createdAt) {
+        this.createdAt = createdAt;
     }
 }

@@ -18,11 +18,13 @@ public class BaseController {
 
     @Resource
     HttpServletRequest httpServletRequest;
-    // 每个方法之前执行的方法
+
+    /**
+     * 每个方法之前执行的方法
+     */
     @ModelAttribute
-    void beforeActions() {
+    void beforeAction() {
         this.authSession = "123";
-        System.out.println("beforeAction:" + httpServletRequest.getMethod());
     }
 
 }

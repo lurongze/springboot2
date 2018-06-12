@@ -8,6 +8,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by on 2017/3/1.
  */
@@ -42,6 +44,15 @@ public class RedisService {
      */
     public void setStr(String key, String val){
         valOpsStr.set(key,val);
+    }
+
+    /**
+     * 设置Str缓存
+     * @param key
+     * @param val
+     */
+    public void setStr(String key, String val, int timeout){
+        valOpsStr.set(key,val,timeout, TimeUnit.SECONDS);
     }
 
     /**

@@ -1,12 +1,11 @@
 package com.lrz.service;
 import com.lrz.model.OpenUser;
-import com.lrz.model.User;
 import com.lrz.core.Service;
 
 
 /**
  * Created by CodeGenerator on 2018/06/12.
  */
-public interface UserService extends Service<User> {
-    void saveOpenUser(OpenUser openUser);
+public interface OpenUserService extends Service<OpenUser> {
+
 }

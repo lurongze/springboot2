@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lrz.dao.OpenUserMapper">
+  <resultMap id="BaseResultMap" type="com.lrz.model.OpenUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="session_key" jdbcType="VARCHAR" property="sessionKey" />
+    <result column="appid" jdbcType="VARCHAR" property="appid" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="wx_session" jdbcType="VARCHAR" property="wxSession" />
+    <result column="unionid" jdbcType="VARCHAR" property="unionid" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+  </resultMap>
+</mapper>

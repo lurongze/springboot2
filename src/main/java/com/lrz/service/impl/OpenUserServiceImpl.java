@@ -1,9 +1,8 @@
 package com.lrz.service.impl;
 
-import com.lrz.dao.UserMapper;
+import com.lrz.dao.OpenUserMapper;
 import com.lrz.model.OpenUser;
-import com.lrz.model.User;
-import com.lrz.service.UserService;
+import com.lrz.service.OpenUserService;
 import com.lrz.core.AbstractService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +15,8 @@ import javax.annotation.Resource;
  */
 @Service
 @Transactional
-public class UserServiceImpl extends AbstractService<User> implements UserService {
+public class OpenUserServiceImpl extends AbstractService<OpenUser> implements OpenUserService {
     @Resource
-    private UserMapper userMapper;
+    private OpenUserMapper openUserMapper;
 
-    @Override
-    public void saveOpenUser(OpenUser openUser) {
-
-    }
 }

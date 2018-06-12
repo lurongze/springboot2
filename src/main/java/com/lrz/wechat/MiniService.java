@@ -25,7 +25,7 @@ public class MiniService extends BaseService{
     @Resource
     private HttpService httpService;
     @Resource
-    OpenUserService openUserService;
+    private OpenUserService openUserService;
 
     private String JSCODE_TO_SESSION_URL = "https://api.weixin.qq.com/sns/jscode2session";
 
@@ -64,7 +64,7 @@ public class MiniService extends BaseService{
             }
             return session_key;
         } catch (Exception e) {
-            throw new ServiceException("获取openid失败");
+            throw new ServiceException("获取openid失败"+e.getMessage());
         }
     }
 

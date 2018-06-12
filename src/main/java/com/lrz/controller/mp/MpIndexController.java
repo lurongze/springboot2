@@ -1,6 +1,5 @@
 package com.lrz.controller.mp;
 
-import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import com.alibaba.fastjson.JSONObject;
 import com.lrz.core.Result;

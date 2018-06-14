@@ -9,4 +9,5 @@ import com.lrz.core.Service;
  */
 public interface UserService extends Service<User> {
     void saveOpenUser(OpenUser openUser);
+    User findByUserName(String userName);
 }

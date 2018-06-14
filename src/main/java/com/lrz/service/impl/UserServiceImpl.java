@@ -24,4 +24,9 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     public void saveOpenUser(OpenUser openUser) {
 
     }
+
+    @Override
+    public User findByUserName(String userName) {
+        return userMapper.findByUserName(userName);
+    }
 }

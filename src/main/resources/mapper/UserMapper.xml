@@ -12,4 +12,9 @@
     <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
     <result column="created_at" jdbcType="INTEGER" property="createdAt" />
   </resultMap>
+
+  <select id="findByUserName" resultMap="BaseResultMap">
+    SELECT * FROM USER WHERE user_name = #{userName}
+  </select>
+
 </mapper>

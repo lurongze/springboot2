@@ -6,8 +6,12 @@ import com.lrz.core.ServiceException;
 import com.lrz.model.OpenUser;
 import com.lrz.service.OpenUserService;
 import me.chanjar.weixin.common.bean.WxAccessToken;
+import me.chanjar.weixin.common.exception.WxErrorException;
+import me.chanjar.weixin.common.util.http.RequestExecutor;
 import org.apache.commons.lang3.StringUtils;
+
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -57,4 +61,26 @@ public class BaseService{
             lock.unlock();
         }
     }
+
+    /**
+     * 向微信端发送请求
+     */
+    public <T, E> T execute(RequestExecutor<T, E> executor, String uri, E data) throws WxErrorException {
+        try {
+            return this.executeInternal(executor, uri, data);
+        } catch (WxErrorException e) {
+            throw new RuntimeException("微信服务端异常，超出重试次数");
+        }
+    }
+
+    private  <T, E> T executeInternal(RequestExecutor<T, E> executor, String uri, E data) throws WxErrorException {
+        try {
+            return executor.execute(uri, data);
+        } catch (WxErrorException e) {
+            return null;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

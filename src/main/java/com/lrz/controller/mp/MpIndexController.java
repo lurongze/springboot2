@@ -9,6 +9,11 @@ import com.lrz.wechat.MiniService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 
 
 @RestController
@@ -67,4 +72,5 @@ public class MpIndexController extends MpBaseController{
         JSONObject data = miniService.getRunData(openUser.getWxSession(), encryptedData, ivStr);
         return ResultGenerator.genSuccessResult(data);
     }
+
 }

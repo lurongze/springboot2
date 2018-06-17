@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+</head>
+<body>
+    <h1 th:text="${hello}">Hello, Spring Boot!</h1>
+    <div th:text="${hello}">
+        this is red color bolder text
+    </div>
+    <img th:src="@{/images/logo.jpg}" />
+</body>
+<script th:src="@{/js/index.js}" type="text/javascript"></script>
+</html>

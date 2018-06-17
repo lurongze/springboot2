@@ -26,14 +26,24 @@ public class BaseService{
     private HttpService httpService;
     @Resource
     private OpenUserService openUserService;
+
+    /**
+     * 根据用户的session值查找到相应的open-user 记录获取open-id
+     * @param authorization 用户的session 值
+     * @return 用户的openId 数据库记录
+     */
     public OpenUser getOpenUserBySession(String session) {
-        return openUserService.findBy("sessionKey", session);
+        OpenUser openUser = openUserService.findBy("sessionKey", session);
+        if (openUser == null) {
+            throw new ServiceException("sessionKey失效，请重新登录");
+        }
+        return openUser;
     }
 
     /**
      * 全局获取accesstoken
-     * @param AppId
-     * @param AppSecret
+     * @param AppId appId 的值
+     * @param AppSecret appSecret 的值
      * @return
      */
     public String getAccessToken(String AppId, String AppSecret) {
@@ -61,26 +71,4 @@ public class BaseService{
             lock.unlock();
         }
     }
-
-    /**
-     * 向微信端发送请求
-     */
-    public <T, E> T execute(RequestExecutor<T, E> executor, String uri, E data) throws WxErrorException {
-        try {
-            return this.executeInternal(executor, uri, data);
-        } catch (WxErrorException e) {
-            throw new RuntimeException("微信服务端异常，超出重试次数");
-        }
-    }
-
-    private  <T, E> T executeInternal(RequestExecutor<T, E> executor, String uri, E data) throws WxErrorException {
-        try {
-            return executor.execute(uri, data);
-        } catch (WxErrorException e) {
-            return null;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }

@@ -25,15 +25,16 @@ public class TokenInterceptor implements WebMvcConfigurer {
 
 
     /**
-     * 这里的是为了thymeleaf 引入静态文件的
+     * 这里的是为了thymeleaf 引入静态文件的-- 拦截器拦截了静态资源的请求
      * @param registry
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        if (!registry.hasMappingForPattern("/webjars/**")) {
-            registry.addResourceHandler("/webjars/**").addResourceLocations(
+        // webjars 引入才需要
+        /*if (!registry.hasMappingForPattern("/webjars*//**")) {
+            registry.addResourceHandler("/webjars*//**").addResourceLocations(
                     "classpath:/META-INF/resources/webjars/");
-        }
+        }*/
         if (!registry.hasMappingForPattern("/**")) {
             registry.addResourceHandler("/**").addResourceLocations(
                     CLASSPATH_RESOURCE_LOCATIONS);

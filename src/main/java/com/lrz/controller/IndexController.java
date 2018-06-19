@@ -5,6 +5,7 @@ import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
 import com.lrz.model.User;
 import com.lrz.service.UserService;
+import com.lrz.utils.HttpUtil;
 import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Condition;
 
@@ -36,7 +37,7 @@ public class IndexController extends BaseController{
         try{
             Map<String, String> params = new HashMap<>();
             params.put("name", "lurongze");
-
+            HttpUtil.httpDoGet("http://127.0.0.1:9011", null, params);
         } catch (Exception e) {
             e.printStackTrace();
         }

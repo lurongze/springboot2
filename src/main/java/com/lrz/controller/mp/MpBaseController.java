@@ -30,7 +30,7 @@ public class MpBaseController {
         this.sessionKey = httpServletRequest.getHeader("authorization");
         // 获取appID，再根据appID获取app secret
         this.AppId = httpServletRequest.getHeader("appid");
-        this.AppSecret = "42c52740e810efbf5ce86e2356cba231";
+        this.AppSecret = "cf205e9d65c810c0f41c16bea666673f";
         this.logger.info("this.sessionKey:" + this.sessionKey + "\n this.AppId:" + this.AppId + "\n this.AppSecret:" + this.AppSecret);
     }
 

@@ -19,4 +19,8 @@ public class OpenUserServiceImpl extends AbstractService<OpenUser> implements Op
     @Resource
     private OpenUserMapper openUserMapper;
 
+    @Override
+    public void updateSessionByOpenId(String sessionKey, String wxSession, String openId){
+        openUserMapper.updateSessionByOpenId(sessionKey, wxSession, openId);
+    }
 }

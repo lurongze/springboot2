@@ -17,9 +17,9 @@ public class MpBaseController {
     protected String AppId;
     protected String AppSecret;
     @Resource
-    HttpServletRequest httpServletRequest;
+    private HttpServletRequest httpServletRequest;
     @Resource
-    OpenUserService openUserService;
+    private OpenUserService openUserService;
 
     /**
      * 每个方法之前执行的方法

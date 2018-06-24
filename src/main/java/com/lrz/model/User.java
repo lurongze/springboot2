@@ -22,6 +22,28 @@ public class User {
     @Column(name = "created_at")
     private Integer createdAt;
 
+    @Column(name = "token")
+    private String token;
+
+    @Column(name = "union_id")
+    private String unionId;
+
+    public String getUnionId() {
+        return unionId;
+    }
+
+    public void setUnionId(String unionId) {
+        this.unionId = unionId;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     /**
      * @return id
      */

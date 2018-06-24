@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lrz.dao.ProductsMapper">
+  <resultMap id="BaseResultMap" type="com.lrz.model.Products">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="union_id" jdbcType="INTEGER" property="unionId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="original_price" jdbcType="INTEGER" property="originalPrice" />
+    <result column="short_description" jdbcType="VARCHAR" property="shortDescription" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="is_show" jdbcType="TINYINT" property="isShow" />
+    <result column="is_recommend" jdbcType="TINYINT" property="isRecommend" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="created_at" jdbcType="INTEGER" property="createdAt" />
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+</mapper>

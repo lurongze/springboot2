@@ -1,5 +1,7 @@
 package com.lrz.controller.admin;
 
+import com.lrz.model.User;
+import com.lrz.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,14 +14,21 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AdminBaseController {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    // 后台token认证
-    protected String token;
+    // 用户id
+    protected Integer userId;
+    protected User userInfo;
     @Resource
     HttpServletRequest httpServletRequest;
-    // 每个方法之前执行的方法
+    @Resource
+    UserService userService;
+
+    /**
+     * 每个方法之前执行的方法
+     */
     @ModelAttribute
     void beforeActions() {
-        this.token = "123";
-        System.out.println("beforeAction:" + httpServletRequest.getMethod());
+        this.userId = Integer.valueOf(httpServletRequest.getAttribute("userId").toString());
+        this.userInfo = userService.findById(this.userId);
+        System.out.println("beforeAction:this.userId:" + this.userId);
     }
 }

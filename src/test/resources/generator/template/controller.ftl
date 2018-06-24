@@ -30,7 +30,11 @@ public class ${modelNameUpperCamel}Controller {
 
     @PostMapping("/delete")
     public Result delete(@RequestParam Integer id) {
-        ${modelNameLowerCamel}Service.deleteById(id);
+        // ${modelNameLowerCamel}Service.deleteById(id);
+        ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
+        byte isDelete = 1;
+        ${modelNameLowerCamel}.setIsDelete(isDelete);
+        ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
         return ResultGenerator.genSuccessResult();
     }
 
@@ -50,7 +54,7 @@ public class ${modelNameUpperCamel}Controller {
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();
-        PageInfo pageInfo = new PageInfo(list);
+        PageInfo pageInfo = new PageInfo<>(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
 }

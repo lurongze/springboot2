@@ -39,8 +39,43 @@ CREATE TABLE `open_user` (
 
 LOCK TABLES `open_user` WRITE;
 /*!40000 ALTER TABLE `open_user` DISABLE KEYS */;
-INSERT INTO `open_user` VALUES ('wxe22a8310f6aadeff','oP_cK0TkMzc86uqhgBmWUq_OdPs8','2a654b110c9bc06eba1c5ed5ca0f0399','qSvdCIh4/1BekCDRvpQgxQ==',NULL,''),('wxe22a8310f6aadeff','oP_cK0TkMzc86uqhgBmWUq_OdPs8','a2b822e83414a90839b547a7d8ec3bd9','4mCNKDX0tRXfDmf9y7rb8A==',NULL,'');
+INSERT INTO `open_user` VALUES ('wxe22a8310f6aadeff','oP_cK0TkMzc86uqhgBmWUq_OdPs8','81C3DAA1AC506AC8FA492BD4F4CD73B4','azTj8aNggdEAMBXVB/6Zcg==',NULL,'');
 /*!40000 ALTER TABLE `open_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `products`
+--
+
+DROP TABLE IF EXISTS `products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `union_id` int(11) NOT NULL COMMENT '组织id',
+  `title` varchar(100) DEFAULT NULL,
+  `picture` varchar(150) DEFAULT NULL COMMENT '产品封面图',
+  `cid` int(11) DEFAULT NULL COMMENT '分类id',
+  `price` int(11) NOT NULL DEFAULT '1000000' COMMENT '商品价格，以分为单位保存',
+  `original_price` int(11) DEFAULT NULL COMMENT '原价',
+  `short_description` varchar(1000) DEFAULT NULL COMMENT '商品简介',
+  `description` text COMMENT '商品描述',
+  `stock` int(11) NOT NULL COMMENT '总库存',
+  `is_show` tinyint(4) DEFAULT '0',
+  `is_recommend` tinyint(4) DEFAULT '0',
+  `is_delete` tinyint(4) DEFAULT '0' COMMENT '是否删除',
+  `created_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='商品表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `products`
+--
+
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -57,8 +92,10 @@ CREATE TABLE `user` (
   `user_address` varchar(500) NOT NULL,
   `user_password` varchar(100) NOT NULL,
   `created_at` int(11) DEFAULT NULL,
+  `token` varchar(500) DEFAULT NULL,
+  `union_id` varchar(50) NOT NULL COMMENT '组织id',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,6 +104,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'lurongze','','','6F74EDF74F8AA6227196CD082A35CAD2',1529748103,NULL,'');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-12 16:27:25
+-- Dump completed on 2018-06-25 18:04:20

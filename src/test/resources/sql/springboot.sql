@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `products`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `union_id` int(11) NOT NULL COMMENT '组织id',
+  `union_id` varchar(50) NOT NULL COMMENT '组织id',
   `title` varchar(100) DEFAULT NULL,
   `picture` varchar(150) DEFAULT NULL COMMENT '产品封面图',
   `cid` int(11) DEFAULT NULL COMMENT '分类id',
@@ -166,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-25 18:04:20
+-- Dump completed on 2018-06-30 18:02:55

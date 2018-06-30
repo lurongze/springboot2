@@ -50,13 +50,12 @@ public class BaseService{
      */
     public String getAccessToken(String AppId, String AppSecret) {
         logger.info("appid:" + AppId + ",appsecret:" + AppSecret);
-        Lock lock = accessTokenLock; // 这里锁住，应该是防止高并发的时候access token 出错
+        Lock lock = accessTokenLock; // 这里锁住，应该是防止高并发的时候access token 出错，最好的方法是用一个定时任务定时更新redis里的token 值
         try {
             lock.lock();
-            String accessKey = "AccessToken@@" + AppId + "@@" + StringUtils.substring(AppId, 2, 6);
+            String accessKey = "AccessToken@@" + AppId;
             String accessToken = redisService.getStr(accessKey);
             if (StringUtils.isEmpty(accessToken)) {
-
                 try{
                     Map<String, String> params = new HashMap<>(3);
                     params.put("grant_type", "client_credential");

@@ -1,5 +1,6 @@
 package com.lrz.controller.admin;
 
+import com.lrz.core.ServiceException;
 import com.lrz.model.User;
 import com.lrz.service.UserService;
 import org.slf4j.Logger;
@@ -30,5 +31,15 @@ public class AdminBaseController {
         this.userId = Integer.valueOf(httpServletRequest.getAttribute("userId").toString());
         this.userInfo = userService.findById(this.userId);
         System.out.println("beforeAction:this.userId:" + this.userId);
+    }
+
+    /**
+     * 判断组织ID是否和登录人的一致
+     * @param unionId 组织ID
+     */
+    public void checkUnion(String unionId) {
+        if (!unionId.equals(this.userInfo.getUnionId())) {
+            throw new ServiceException("组织ID不匹配");
+        }
     }
 }

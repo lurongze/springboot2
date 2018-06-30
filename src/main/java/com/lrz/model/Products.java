@@ -11,7 +11,7 @@ public class Products {
      * 组织id
      */
     @Column(name = "union_id")
-    private Integer unionId;
+    private String unionId;
 
     private String title;
 
@@ -86,7 +86,7 @@ public class Products {
      *
      * @return union_id - 组织id
      */
-    public Integer getUnionId() {
+    public String getUnionId() {
         return unionId;
     }
 
@@ -95,7 +95,7 @@ public class Products {
      *
      * @param unionId 组织id
      */
-    public void setUnionId(Integer unionId) {
+    public void setUnionId(String unionId) {
         this.unionId = unionId;
     }
 

@@ -4,7 +4,7 @@ import com.lrz.core.Service;
 
 
 /**
- * Created by CodeGenerator on 2018/06/24.
+ * Created by CodeGenerator on 2018/06/30.
  */
 public interface ProductsService extends Service<Products> {
 

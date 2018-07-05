@@ -43,22 +43,24 @@ public class TokenInterceptor implements HandlerInterceptor {
             }
         }
 
-        if(URI.startsWith("/admin")) { // 后台
+        if(URI.startsWith("/admin")) { // 后台登录验证 -- start
             String id = "0";
+            // 登录和OPTIONS请求就不验证token了
             if(!"/admin/index/login".equals(URI) && !"OPTIONS".equals(request.getMethod().toUpperCase())) {
                 String authorization = request.getHeader("authorization");
                 if(StringUtils.isEmpty(authorization)){
                     response.sendError(401);
                     throw new ServiceException("请求必须要有authorization的header值");
                 }else {
+                    // 开始判断token里面的信息，base64解码后等到内容和加密串。通过再次加密内容和加密串对比
                     String tokenInfo = HelperUtil.Base64Decode(authorization);
                     JSONObject info = JSON.parseObject(tokenInfo);
                     String name = info.getString("name");
                     id = info.getString("id");
                     String sign = info.getString("sign");
                     String loginTime = info.getString("loginTime");
-                    String IP = HelperUtil.getIpAddr(request);
-                    String encodeSign = HelperUtil.encodePassword( name + "*" + id + "*" + IP + "*" + loginTime);
+                    String IP = HelperUtil.getIpAddress(request);
+                    String encodeSign = HelperUtil.encodePassword( name + "*|*" + id + "*|*" + IP + "*|*" + loginTime);
                     if(!sign.equals(encodeSign)) {
                         response.sendError(401);
                         throw new ServiceException("非法authorization");
@@ -67,14 +69,14 @@ public class TokenInterceptor implements HandlerInterceptor {
                         Integer tokenTime = Integer.valueOf(loginTime);
                         if((tokenTime + 3600*2) < time) {
                             response.sendError(401);
-                            throw new ServiceException("token已过期");
+                            throw new ServiceException("登录信息已过期，请重新登录");
                         }
                     }
                 }
             }
             // 把用户的id 传递过去，少操作一次
             request.setAttribute("userId", id);
-        }
+        } // 后台登录验证 -- end
         return true;
     }
 }

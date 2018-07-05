@@ -14,10 +14,10 @@ public class HelperUtil {
     /**
      * 加密密码 或者 token
      * @param userPassword 加密的字符串
-     * @return 加密后的字符串
+     * @return 加密后的字符串，多加了几次MD5加密减低暴力破解的风险
      */
     public static String encodePassword(String userPassword) {
-        return HashCrypt.string2MD5(userPassword + "ee" + HashCrypt.string2MD5(userPassword + "xs" + HashCrypt.string2MD5(userPassword + "a"))).toUpperCase();
+        return HashCrypt.string2MD5(userPassword + "lrz" + HashCrypt.string2MD5(userPassword + "rz" + HashCrypt.string2MD5(userPassword + "z"))).toUpperCase();
     }
 
 
@@ -26,7 +26,7 @@ public class HelperUtil {
      * @param request 请求实例
      * @return IP
      */
-    public static String getIpAddr(HttpServletRequest request) {
+    public static String getIpAddress(HttpServletRequest request) {
         String ipAddress;
         try {
             ipAddress = request.getHeader("x-forwarded-for");

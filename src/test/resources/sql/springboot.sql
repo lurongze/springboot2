@@ -79,6 +79,33 @@ LOCK TABLES `products` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `union_group`
+--
+
+DROP TABLE IF EXISTS `union_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `union_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `union_name` varchar(150) DEFAULT NULL COMMENT '组织名称',
+  `union_id` varchar(50) DEFAULT NULL COMMENT '组织id',
+  `union_description` varchar(255) DEFAULT NULL,
+  `createtime` int(11) DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `union_group_union_id_uindex` (`union_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='组织表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `union_group`
+--
+
+LOCK TABLES `union_group` WRITE;
+/*!40000 ALTER TABLE `union_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `union_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -166,4 +193,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-30 18:02:55
+-- Dump completed on 2018-07-05 18:11:52

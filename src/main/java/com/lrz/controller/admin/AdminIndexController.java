@@ -56,6 +56,12 @@ public class AdminIndexController extends AdminBaseController{
         }
     }
 
+    /**
+     * 用户登录
+     * @param userName 用户名
+     * @param userPassword 密码
+     * @return 登录token
+     */
     @PostMapping("/login")
     public Result login(@RequestParam String userName, @RequestParam String userPassword) {
         User user = userService.findByUserName(userName);
@@ -67,8 +73,8 @@ public class AdminIndexController extends AdminBaseController{
                 userInfo.put("name", user.getUserName());
                 Integer time = HelperUtil.getTimeStamp();
                 userInfo.put("loginTime", time);
-                String IP = HelperUtil.getIpAddr(httpServletRequest);
-                userInfo.put("sign", HelperUtil.encodePassword( user.getUserName() + "*" + user.getId() + "*" + IP + "*" + time));
+                String IP = HelperUtil.getIpAddress(httpServletRequest);
+                userInfo.put("sign", HelperUtil.encodePassword( user.getUserName() + "*|*" + user.getId() + "*|*" + IP + "*|*" + time));
                 String token = HelperUtil.Base64Encode(userInfo.toJSONString());
                 return ResultGenerator.genSuccessResult(token);
             }else {

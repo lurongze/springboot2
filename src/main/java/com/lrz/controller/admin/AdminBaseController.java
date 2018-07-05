@@ -28,13 +28,14 @@ public class AdminBaseController {
      */
     @ModelAttribute
     void beforeActions() {
+        // 拦截器解析判断的时候赋值给request userId 了，所以这里可以直接拿到
         this.userId = Integer.valueOf(httpServletRequest.getAttribute("userId").toString());
         this.userInfo = userService.findById(this.userId);
-        System.out.println("beforeAction:this.userId:" + this.userId);
+        logger.info("beforeAction:this.userInfo:", this.userInfo);
     }
 
     /**
-     * 判断组织ID是否和登录人的一致
+     * 判断组织ID是否和登录人的一致，在需要的时候再验证
      * @param unionId 组织ID
      */
     public void checkUnion(String unionId) {

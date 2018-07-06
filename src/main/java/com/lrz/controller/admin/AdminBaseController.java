@@ -5,9 +5,9 @@ import com.lrz.model.User;
 import com.lrz.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -18,9 +18,9 @@ public class AdminBaseController {
     // 用户id
     protected Integer userId;
     protected User userInfo;
-    @Resource
+    @Autowired
     HttpServletRequest httpServletRequest;
-    @Resource
+    @Autowired
     UserService userService;
 
     /**
@@ -31,6 +31,11 @@ public class AdminBaseController {
         // 拦截器解析判断的时候赋值给request userId 了，所以这里可以直接拿到
         this.userId = Integer.valueOf(httpServletRequest.getAttribute("userId").toString());
         this.userInfo = userService.findById(this.userId);
+        String authorization = httpServletRequest.getHeader("authorization");
+        if (this.userInfo != null && !this.userInfo.getToken().equals(authorization)) {
+            logger.info("beforeAction:", "token 和 用户不匹配");
+        }
+
         logger.info("beforeAction:this.userInfo:", this.userInfo);
     }
 

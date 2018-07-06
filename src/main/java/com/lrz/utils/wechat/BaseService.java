@@ -1,4 +1,4 @@
-package com.lrz.wechat;
+package com.lrz.utils.wechat;
 
 import com.lrz.core.RedisService;
 import com.lrz.core.ServiceException;
@@ -19,6 +19,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by gz000172 on 2018/6/7.
+ * 这里是微信开发的工具包
  */
 public class BaseService{
     protected Logger logger = LoggerFactory.getLogger(this.getClass());

@@ -6,10 +6,10 @@ import com.lrz.core.ResultGenerator;
 import com.lrz.model.User;
 import com.lrz.service.UserService;
 import com.lrz.utils.HttpUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Condition;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,9 +21,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/")
 public class IndexController extends BaseController{
-    @Resource
+    @Autowired
     private RedisService redisService;
-    @Resource
+    @Autowired
     private UserService userService;
     @GetMapping("/index")
     public String index() {

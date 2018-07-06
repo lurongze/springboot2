@@ -5,22 +5,15 @@ import com.alibaba.fastjson.JSONObject;
 import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
 import com.lrz.model.OpenUser;
-import com.lrz.wechat.MiniService;
+import com.lrz.utils.wechat.MiniService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-
 
 @RestController
 @RequestMapping("/mp/index")
 public class MpIndexController extends MpBaseController{
 
-    @Resource
+    @Autowired
     MiniService miniService;
 
     /**

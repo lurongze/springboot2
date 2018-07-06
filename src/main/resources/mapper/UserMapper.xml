@@ -11,6 +11,9 @@
     <result column="user_address" jdbcType="VARCHAR" property="userAddress" />
     <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
     <result column="created_at" jdbcType="INTEGER" property="createdAt" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="union_id" jdbcType="VARCHAR" property="unionId" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
   </resultMap>
 
   <select id="findByUserName" resultMap="BaseResultMap">

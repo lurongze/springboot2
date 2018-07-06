@@ -1,4 +1,4 @@
-package com.lrz.wechat;
+package com.lrz.utils.wechat;
 
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;

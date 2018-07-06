@@ -1,3 +1,5 @@
+import com.lrz.utils.HelperUtil;
+
 import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -9,15 +11,10 @@ import java.util.Date;
 public class Test {
     public static void main(String[] args) {
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try{
-            Date today = new Date();
-            String formatToday = formatter.format(today);
-            Date ss = new java.sql.Date(today.getTime());
-            System.out.println("######TIME:"+ ss);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        String pass = "123456";
+        String encode = HelperUtil.encodePassword(pass);
+
+        System.out.println(encode);
 
     }
 }

@@ -8,8 +8,8 @@ import com.lrz.model.User;
 import com.lrz.service.UserService;
 import com.lrz.utils.HelperUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import javax.annotation.Resource;
 import java.util.UUID;
 
 /**
@@ -18,7 +18,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/admin/index")
 public class AdminIndexController extends AdminBaseController{
-    @Resource
+    @Autowired
     private UserService userService;
     @GetMapping("/index")
     public String index(@RequestParam(defaultValue = "error") String type) {
@@ -76,6 +76,9 @@ public class AdminIndexController extends AdminBaseController{
                 String IP = HelperUtil.getIpAddress(httpServletRequest);
                 userInfo.put("sign", HelperUtil.encodePassword( user.getUserName() + "*|*" + user.getId() + "*|*" + IP + "*|*" + time));
                 String token = HelperUtil.Base64Encode(userInfo.toJSONString());
+                // 登录成功了，更新一下token值
+                user.setToken(token);
+                userService.update(user);
                 return ResultGenerator.genSuccessResult(token);
             }else {
                 throw new ServiceException("用户名或密码错误");

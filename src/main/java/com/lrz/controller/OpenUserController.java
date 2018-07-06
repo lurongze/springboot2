@@ -1,4 +1,4 @@
-package com.lrz.web;
+package com.lrz.controller;
 
 import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
@@ -6,9 +6,9 @@ import com.lrz.model.OpenUser;
 import com.lrz.service.OpenUserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/open/user")
 public class OpenUserController {
-    @Resource
+    @Autowired
     private OpenUserService openUserService;
 
     @PostMapping

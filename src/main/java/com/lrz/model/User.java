@@ -22,27 +22,16 @@ public class User {
     @Column(name = "created_at")
     private Integer createdAt;
 
-    @Column(name = "token")
     private String token;
 
+    /**
+     * 组织id
+     */
     @Column(name = "union_id")
     private String unionId;
 
-    public String getUnionId() {
-        return unionId;
-    }
-
-    public void setUnionId(String unionId) {
-        this.unionId = unionId;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
+    @Column(name = "is_delete")
+    private Byte isDelete;
 
     /**
      * @return id
@@ -126,5 +115,51 @@ public class User {
      */
     public void setCreatedAt(Integer createdAt) {
         this.createdAt = createdAt;
+    }
+
+    /**
+     * @return token
+     */
+    public String getToken() {
+        return token;
+    }
+
+    /**
+     * @param token
+     */
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    /**
+     * 获取组织id
+     *
+     * @return union_id - 组织id
+     */
+    public String getUnionId() {
+        return unionId;
+    }
+
+    /**
+     * 设置组织id
+     *
+     * @param unionId 组织id
+     */
+    public void setUnionId(String unionId) {
+        this.unionId = unionId;
+    }
+
+    /**
+     * @return is_delete
+     */
+    public Byte getIsDelete() {
+        return isDelete;
+    }
+
+    /**
+     * @param isDelete
+     */
+    public void setIsDelete(Byte isDelete) {
+        this.isDelete = isDelete;
     }
 }

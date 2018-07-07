@@ -5,7 +5,6 @@ import com.lrz.model.OpenUser;
 import com.lrz.model.User;
 import com.lrz.service.UserService;
 import com.lrz.core.AbstractService;
-import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,53 +1,56 @@
-package com.lrz.controller;
+package com.lrz.controller.admin;
 
 import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
-import com.lrz.model.OpenUser;
-import com.lrz.service.OpenUserService;
+import com.lrz.model.UnionGroup;
+import com.lrz.service.UnionGroupService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 /**
-* Created by CodeGenerator on 2018/06/12.
+* Created by CodeGenerator on 2018/07/07.
 */
 @RestController
-@RequestMapping("/open/user")
-public class OpenUserController {
+@RequestMapping("/admin/union/group")
+public class UnionGroupController {
     @Autowired
-    private OpenUserService openUserService;
+    private UnionGroupService unionGroupService;
 
     @PostMapping
-    public Result add(@RequestBody OpenUser openUser) {
-        openUserService.save(openUser);
+    public Result add(@RequestBody UnionGroup unionGroup) {
+        unionGroupService.save(unionGroup);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
-        openUserService.deleteById(id);
+        UnionGroup unionGroup = unionGroupService.findById(id);
+        byte isDelete = 1;
+        unionGroup.setIsDelete(isDelete);
+        unionGroupService.update(unionGroup);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody OpenUser openUser) {
-        openUserService.update(openUser);
+    public Result update(@RequestBody UnionGroup unionGroup) {
+        unionGroupService.update(unionGroup);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
     public Result detail(@PathVariable Integer id) {
-        OpenUser openUser = openUserService.findById(id);
-        return ResultGenerator.genSuccessResult(openUser);
+        UnionGroup unionGroup = unionGroupService.findById(id);
+        return ResultGenerator.genSuccessResult(unionGroup);
     }
 
     @GetMapping
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
-        List<OpenUser> list = openUserService.findAll();
+        List<UnionGroup> list = unionGroupService.findAll();
         PageInfo pageInfo = new PageInfo<>(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

@@ -1,4 +1,4 @@
-package com.lrz.controller;
+package com.lrz.controller.admin;
 
 import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
-* Created by CodeGenerator on 2018/07/06.
+* Created by CodeGenerator on 2018/07/07.
 */
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/admin/user")
+public class UserController extends AdminBaseController{
     @Autowired
     private UserService userService;
 

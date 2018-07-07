@@ -19,9 +19,9 @@ public class AdminBaseController {
     protected Integer userId;
     protected User userInfo;
     @Autowired
-    HttpServletRequest httpServletRequest;
+    protected HttpServletRequest httpServletRequest;
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     /**
      * 每个方法之前执行的方法

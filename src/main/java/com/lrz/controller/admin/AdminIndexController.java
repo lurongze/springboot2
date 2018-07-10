@@ -10,6 +10,8 @@ import com.lrz.utils.HelperUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 /**
@@ -18,8 +20,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/admin/index")
 public class AdminIndexController extends AdminBaseController{
+    private final UserService userService;
     @Autowired
-    private UserService userService;
+    public AdminIndexController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/index")
     public String index(@RequestParam(defaultValue = "error") String type) {
         if("error".equals(type)) {
@@ -63,7 +69,7 @@ public class AdminIndexController extends AdminBaseController{
      * @return 登录token
      */
     @PostMapping("/login")
-    public Result login(@RequestParam String userName, @RequestParam String userPassword) {
+    public Result login(@RequestParam String userName, @RequestParam String userPassword, HttpServletRequest httpServletRequest) {
         User user = userService.findByUserName(userName);
         if(user != null) {
             String encodePassword = HelperUtil.encodePassword(userPassword);

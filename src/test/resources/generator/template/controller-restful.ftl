@@ -21,7 +21,7 @@ public class ${modelNameUpperCamel}Controller {
     private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 
     @PostMapping
-    public Result add(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
+    public Result add(${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
         return ResultGenerator.genSuccessResult();
     }
@@ -37,7 +37,7 @@ public class ${modelNameUpperCamel}Controller {
     }
 
     @PutMapping
-    public Result update(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
+    public Result update(${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
         return ResultGenerator.genSuccessResult();
     }
@@ -50,8 +50,13 @@ public class ${modelNameUpperCamel}Controller {
 
     @GetMapping
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
-        PageHelper.startPage(page, size);
-        List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();
+        String orderBy = "id ASC";
+        PageHelper.startPage(page, size, orderBy);
+        // List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();
+        Condition condition = new Condition(${modelNameUpperCamel}.class);
+        condition.createCriteria().andEqualTo("isDelete", "0");
+        // condition.and().andEqualTo("fisuse" ,"1");
+        List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findByCondition(condition);
         PageInfo pageInfo = new PageInfo<>(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

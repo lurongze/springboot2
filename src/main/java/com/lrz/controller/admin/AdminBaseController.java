@@ -19,15 +19,13 @@ public class AdminBaseController {
     protected Integer userId;
     protected User userInfo;
     @Autowired
-    protected HttpServletRequest httpServletRequest;
-    @Autowired
     private UserService userService;
 
     /**
      * 每个方法之前执行的方法
      */
     @ModelAttribute
-    void beforeActions() {
+    void beforeAction(HttpServletRequest httpServletRequest) {
         // 拦截器解析判断的时候赋值给request userId 了，所以这里可以直接拿到
         this.userId = Integer.valueOf(httpServletRequest.getAttribute("userId").toString());
         this.userInfo = userService.findById(this.userId);

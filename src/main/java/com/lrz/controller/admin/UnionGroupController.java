@@ -21,7 +21,7 @@ public class UnionGroupController {
     private UnionGroupService unionGroupService;
 
     @PostMapping
-    public Result add(@RequestBody UnionGroup unionGroup) {
+    public Result add(UnionGroup unionGroup) {
         unionGroupService.save(unionGroup);
         return ResultGenerator.genSuccessResult();
     }
@@ -36,7 +36,7 @@ public class UnionGroupController {
     }
 
     @PutMapping
-    public Result update(@RequestBody UnionGroup unionGroup) {
+    public Result update(UnionGroup unionGroup) {
         unionGroupService.update(unionGroup);
         return ResultGenerator.genSuccessResult();
     }
@@ -53,5 +53,14 @@ public class UnionGroupController {
         List<UnionGroup> list = unionGroupService.findAll();
         PageInfo pageInfo = new PageInfo<>(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    /**
+     * @return 返回实体的结构
+     */
+    @GetMapping("/entity")
+    public Result entity() {
+        UnionGroup unionGroupEntity = new UnionGroup();
+        return ResultGenerator.genSuccessResult(unionGroupEntity);
     }
 }

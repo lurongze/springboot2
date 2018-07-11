@@ -16,8 +16,6 @@ import java.util.List;
  * Created by gz000172 on 2018/6/4.
  */
 public class FastJsonConfigurer implements WebMvcConfigurer {
-    private final Logger logger = LoggerFactory.getLogger(TokenInterceptor.class);
-
     //使用阿里 FastJson 作为JSON MessageConverter
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {

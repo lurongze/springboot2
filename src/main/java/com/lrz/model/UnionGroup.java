@@ -26,6 +26,7 @@ public class UnionGroup {
     /**
      * 创建时间
      */
+    @Column(name = "createtime")
     private Integer createtime;
 
     @Column(name = "is_delete")

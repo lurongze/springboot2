@@ -60,4 +60,14 @@ public class ${modelNameUpperCamel}Controller {
         PageInfo pageInfo = new PageInfo<>(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
+
+    /**
+    * @return 返回实体的结构
+    */
+    @GetMapping("/entity")
+    public Result entity() {
+        ${modelNameUpperCamel} ${modelNameLowerCamel}Entity = new ${modelNameUpperCamel}();
+        ${modelNameLowerCamel}Entity.setUnionId("0");
+        return ResultGenerator.genSuccessResult(${modelNameLowerCamel}Entity);
+    }
 }

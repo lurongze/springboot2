@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2018/07/07.
@@ -22,6 +23,7 @@ public class UnionGroupController {
 
     @PostMapping
     public Result add(UnionGroup unionGroup) {
+        unionGroup.setUnionId(UUID.randomUUID().toString());
         unionGroupService.save(unionGroup);
         return ResultGenerator.genSuccessResult();
     }

@@ -45,6 +45,7 @@ public class Products {
     /**
      * 总库存
      */
+    @Column(name = "stock")
     private Integer stock;
 
     @Column(name = "is_show")
@@ -65,6 +66,7 @@ public class Products {
     /**
      * 商品描述
      */
+    @Column(name = "description")
     private String description;
 
     /**

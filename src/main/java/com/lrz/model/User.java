@@ -22,6 +22,7 @@ public class User {
     @Column(name = "created_at")
     private Integer createdAt;
 
+    @Column(name = "token")
     private String token;
 
     /**

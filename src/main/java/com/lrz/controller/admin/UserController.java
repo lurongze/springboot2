@@ -31,6 +31,7 @@ public class UserController extends AdminBaseController{
 
     @PostMapping
     public Result add(User user) {
+        checkAdmin();
         String userName = user.getUserName();
         User checkUser = userService.findByUserName(userName);
         if(checkUser != null) {
@@ -49,6 +50,7 @@ public class UserController extends AdminBaseController{
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
+        checkAdmin();
         // userService.deleteById(id);
         User user = userService.findById(id);
         byte isDelete = 1;
@@ -59,24 +61,28 @@ public class UserController extends AdminBaseController{
 
     @PutMapping
     public Result update(User user) {
+        checkAdmin();
         userService.update(user);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
     public Result detail(@PathVariable Integer id) {
+        checkAdmin();
         User user = userService.findById(id);
         return ResultGenerator.genSuccessResult(user);
     }
 
     @GetMapping
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+        checkAdmin();
         String orderBy = "id ASC";
         PageHelper.startPage(page, size, orderBy);
-        Condition condition = new Condition(User.class);
-        condition.createCriteria().andEqualTo("isDelete", "0");
-        // condition.and().andEqualTo("fisuse" ,"1");
-        List<User> list = userService.findByCondition(condition);
+        String unionId = "";
+        if (!checkAdminBoolean()) {
+            unionId = this.userInfo.getUnionId();
+        }
+        List<User> list = userService.getList(unionId);
         PageInfo pageInfo = new PageInfo<>(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
@@ -86,8 +92,13 @@ public class UserController extends AdminBaseController{
      */
     @GetMapping("/entity")
     public Result entity() {
+        checkAdmin();
         User userEntity = new User();
-        userEntity.setUnionId("0");
+        if(StringUtils.isNotEmpty(this.userInfo.getUnionId())) {
+            userEntity.setUnionId(this.userInfo.getUnionId());
+        } else {
+            userEntity.setUnionId("0");
+        }
         return ResultGenerator.genSuccessResult(userEntity);
     }
 

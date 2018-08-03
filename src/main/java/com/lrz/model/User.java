@@ -34,6 +34,17 @@ public class User {
     @Column(name = "is_delete")
     private Byte isDelete;
 
+    @Transient
+    private String unionName;
+
+    public String getUnionName() {
+        return unionName;
+    }
+
+    public void setUnionName(String unionName) {
+        this.unionName = unionName;
+    }
+
     /**
      * @return id
      */

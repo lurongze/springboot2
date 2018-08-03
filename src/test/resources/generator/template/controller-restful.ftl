@@ -8,7 +8,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import tk.mybatis.mapper.entity.Condition;
 import java.util.List;
 
 /**
@@ -17,8 +17,15 @@ import java.util.List;
 @RestController
 @RequestMapping("${baseRequestMapping}")
 public class ${modelNameUpperCamel}Controller {
+    <#--@Autowired-->
+    <#--private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;-->
+
+    private final ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
     @Autowired
-    private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
+    public UserRoleController(${modelNameUpperCamel}Service ${modelNameLowerCamel}Service) {
+        this.${modelNameLowerCamel}Service = ${modelNameLowerCamel}Service;
+    }
+
 
     @PostMapping
     public Result add(${modelNameUpperCamel} ${modelNameLowerCamel}) {

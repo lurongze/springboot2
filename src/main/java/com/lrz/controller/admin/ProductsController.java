@@ -17,8 +17,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/products")
 public class ProductsController extends AdminBaseController{
+
+    private final ProductsService productsService;
     @Autowired
-    private ProductsService productsService;
+    public ProductsController(ProductsService productsService) {
+        this.productsService = productsService;
+    }
 
     @PostMapping
     public Result add(@RequestBody Products products) {

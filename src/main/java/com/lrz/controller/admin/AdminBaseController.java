@@ -3,6 +3,7 @@ package com.lrz.controller.admin;
 import com.lrz.core.ServiceException;
 import com.lrz.model.User;
 import com.lrz.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by gz000172 on 2018/6/5.
  */
 public class AdminBaseController {
+    public final String systemAdminUserName = "lurongze";
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     // 用户id
     protected Integer userId;
@@ -32,9 +34,13 @@ public class AdminBaseController {
         String authorization = httpServletRequest.getHeader("authorization");
         if (this.userInfo != null && !this.userInfo.getToken().equals(authorization)) {
             logger.info("beforeAction:", "token 和 用户不匹配");
+            throw new ServiceException("token 和 用户不匹配");
         }
-
         logger.info("beforeAction:this.userInfo:", this.userInfo);
+        if (this.userInfo != null && !systemAdminUserName.equals(this.userInfo.getUserName())) { // 非管理员
+            String unionId = httpServletRequest.getHeader("union-id");
+            checkUnion(unionId);
+        }
     }
 
     /**
@@ -42,8 +48,20 @@ public class AdminBaseController {
      * @param unionId 组织ID
      */
     public void checkUnion(String unionId) {
-        if (!unionId.equals(this.userInfo.getUnionId())) {
-            throw new ServiceException("组织ID不匹配");
+        if (StringUtils.isEmpty(unionId) || !unionId.equals(this.userInfo.getUnionId())) {
+            // 组织id 不一致
+            throw new ServiceException("无权限：201807271139-47");
         }
     }
+
+    public void checkAdmin() {
+        if (!systemAdminUserName.equals(this.userInfo.getUserName())) {
+            throw new ServiceException("无权限：201807271139-53");
+        }
+    }
+
+    public Boolean checkAdminBoolean() {
+        return systemAdminUserName.equals(this.userInfo.getUserName());
+    }
+
 }

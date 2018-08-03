@@ -19,5 +19,12 @@
   <select id="findByUserName" resultMap="BaseResultMap">
     SELECT * FROM USER WHERE user_name = #{userName}
   </select>
+  
+  <select id="getList" resultMap="BaseResultMap">
+    SELECT u.*,un.union_name unionName FROM user u LEFT JOIN union_group un ON u.union_id = un.union_id WHERE u.is_delete = '0'
+    <if test="unionId != null and unionId != ''">
+      AND u.union_id = #{unionId}
+    </if>
+  </select>
 
 </mapper>

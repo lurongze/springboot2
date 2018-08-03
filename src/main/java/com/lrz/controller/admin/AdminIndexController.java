@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by gz000172 on 2018/6/5.
@@ -74,6 +74,7 @@ public class AdminIndexController extends AdminBaseController{
         if(user != null) {
             String encodePassword = HelperUtil.encodePassword(userPassword);
             if(encodePassword.equals(user.getUserPassword())) {
+                // 把userInfo 的信息弄成json结构，sign是防止数据修改
                 JSONObject userInfo = new JSONObject();
                 userInfo.put("id", user.getId());
                 userInfo.put("name", user.getUserName());
@@ -85,7 +86,16 @@ public class AdminIndexController extends AdminBaseController{
                 // 登录成功了，更新一下token值
                 user.setToken(token);
                 userService.update(user);
-                return ResultGenerator.genSuccessResult(token);
+                Map<String, Object> res = new HashMap<>();
+                res.put("token", token);
+                res.put("userName", user.getUserName());
+                res.put("unionId", user.getUnionId());
+                if ("lurongze".equals(user.getUserName())) {
+                    res.put("permissionList", "systemAdmin");
+                } else {
+                    res.put("permissionList", getUserPermission());
+                }
+                return ResultGenerator.genSuccessResult(res);
             }else {
                 throw new ServiceException("用户名或密码错误");
             }
@@ -94,13 +104,13 @@ public class AdminIndexController extends AdminBaseController{
         }
     }
 
-    @GetMapping("/getUserInfo")
-    public Result getUserInfo() {
-        JSONObject info = new JSONObject();
-        info.put("roles", "viewer,viewerAndEditor");
-        info.put("name", "lurongze");
-        info.put("avatar", "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2436331379,3968394271&fm=27&gp=0.jpg");
-        info.put("introduction", "123");
-        return ResultGenerator.genSuccessResult(info);
+    public ArrayList<String> getUserPermission() {
+        ArrayList<String> permissionList = new ArrayList<>();
+        permissionList.add("/category/list");
+        permissionList.add("/category/edit");
+        permissionList.add("/category/add");
+        permissionList.add("/category/delete");
+        permissionList.add("/user/list");
+        return permissionList;
     }
 }

@@ -27,14 +27,14 @@ public class ${modelNameUpperCamel}Controller {
     }
 
 
-    @PostMapping
+    @PostMapping("/add")
     public Result add(${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
         return ResultGenerator.genSuccessResult();
     }
 
-    @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    @PostMapping("/delete")
+    public Result delete(@RequestParam(defaultValue = "0") Integer id) {
         // ${modelNameLowerCamel}Service.deleteById(id);
         ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
         byte isDelete = 1;
@@ -43,19 +43,19 @@ public class ${modelNameUpperCamel}Controller {
         return ResultGenerator.genSuccessResult();
     }
 
-    @PutMapping
+    @PostMapping("/update")
     public Result update(${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
         return ResultGenerator.genSuccessResult();
     }
 
-    @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    @GetMapping("/detail")
+    public Result detail(@RequestParam(defaultValue = "0") Integer id) {
         ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
         return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         String orderBy = "id ASC";
         PageHelper.startPage(page, size, orderBy);

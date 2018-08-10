@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     private final Logger logger = LoggerFactory.getLogger(TokenInterceptor.class);
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String URI = request.getRequestURI();
         logger.info("进入拦截器:" + URI);
         if(URI.startsWith("/mp")) { // 小程序的API

@@ -4,12 +4,15 @@ import com.alibaba.fastjson.JSONObject;
 import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
 import com.lrz.core.ServiceException;
+import com.lrz.model.RolePermission;
 import com.lrz.model.User;
+import com.lrz.service.RolePermissionService;
 import com.lrz.service.UserService;
 import com.lrz.utils.HelperUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tk.mybatis.mapper.entity.Condition;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -21,9 +24,11 @@ import java.util.*;
 @RequestMapping("/admin/index")
 public class AdminIndexController extends AdminBaseController{
     private final UserService userService;
+    private final RolePermissionService rolePermissionService;
     @Autowired
-    public AdminIndexController(UserService userService) {
+    public AdminIndexController(UserService userService, RolePermissionService rolePermissionService) {
         this.userService = userService;
+        this.rolePermissionService = rolePermissionService;
     }
 
     @GetMapping("/index")
@@ -93,7 +98,7 @@ public class AdminIndexController extends AdminBaseController{
                 if ("lurongze".equals(user.getUserName())) {
                     res.put("permissionList", "systemAdmin");
                 } else {
-                    res.put("permissionList", getUserPermission());
+                    res.put("permissionList", getUserPermission(user.getRoleId()));
                 }
                 return ResultGenerator.genSuccessResult(res);
             }else {
@@ -104,13 +109,14 @@ public class AdminIndexController extends AdminBaseController{
         }
     }
 
-    public ArrayList<String> getUserPermission() {
+    public ArrayList<String> getUserPermission(Integer roleId) {
+        Condition condition = new Condition(RolePermission.class);
+        condition.createCriteria().andEqualTo("roleId", roleId);
+        List<RolePermission> res = rolePermissionService.findByCondition(condition);
         ArrayList<String> permissionList = new ArrayList<>();
-        permissionList.add("/category/list");
-        permissionList.add("/category/edit");
-        permissionList.add("/category/add");
-        permissionList.add("/category/delete");
-        permissionList.add("/user/list");
+        for(RolePermission item:res) {
+            permissionList.add(item.getPermission());
+        }
         return permissionList;
     }
 }

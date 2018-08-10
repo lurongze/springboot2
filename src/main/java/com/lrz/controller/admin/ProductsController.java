@@ -24,14 +24,14 @@ public class ProductsController extends AdminBaseController{
         this.productsService = productsService;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public Result add(@RequestBody Products products) {
         productsService.save(products);
         return ResultGenerator.genSuccessResult();
     }
 
-    @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    @PostMapping("/delete")
+    public Result delete(@RequestParam(defaultValue = "0") Integer id) {
         Products products = productsService.findById(id);
         this.checkUnion(products.getUnionId());
         byte isDelete = 1;
@@ -40,19 +40,19 @@ public class ProductsController extends AdminBaseController{
         return ResultGenerator.genSuccessResult();
     }
 
-    @PutMapping
+    @PostMapping("/update")
     public Result update(@RequestBody Products products) {
         productsService.update(products);
         return ResultGenerator.genSuccessResult();
     }
 
-    @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    @GetMapping("/detail")
+    public Result detail(@RequestParam(defaultValue = "0") Integer id) {
         Products products = productsService.findById(id);
         return ResultGenerator.genSuccessResult(products);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
         List<Products> list = productsService.findAll();

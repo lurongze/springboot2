@@ -29,7 +29,7 @@ public class UserController extends AdminBaseController{
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public Result add(User user) {
         checkAdmin();
         String userName = user.getUserName();
@@ -48,8 +48,8 @@ public class UserController extends AdminBaseController{
         return ResultGenerator.genSuccessResult("账号注册成功：" + userName);
     }
 
-    @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    @PostMapping("/delete")
+    public Result delete(@RequestParam(defaultValue = "0") Integer id) {
         checkAdmin();
         // userService.deleteById(id);
         User user = userService.findById(id);
@@ -59,21 +59,21 @@ public class UserController extends AdminBaseController{
         return ResultGenerator.genSuccessResult();
     }
 
-    @PutMapping
+    @PostMapping("/update")
     public Result update(User user) {
         checkAdmin();
         userService.update(user);
         return ResultGenerator.genSuccessResult();
     }
 
-    @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    @GetMapping("/detail")
+    public Result detail(@RequestParam(defaultValue = "0") Integer id) {
         checkAdmin();
         User user = userService.findById(id);
         return ResultGenerator.genSuccessResult(user);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         checkAdmin();
         String orderBy = "id ASC";

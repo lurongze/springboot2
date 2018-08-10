@@ -26,7 +26,7 @@ public class UnionGroupController extends AdminBaseController{
         this.unionGroupService = unionGroupService;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public Result add(UnionGroup unionGroup) {
         checkAdmin();
         unionGroup.setUnionId(UUID.randomUUID().toString());
@@ -34,8 +34,8 @@ public class UnionGroupController extends AdminBaseController{
         return ResultGenerator.genSuccessResult();
     }
 
-    @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    @PostMapping("/delete")
+    public Result delete(@RequestParam(defaultValue = "0") Integer id) {
         checkAdmin();
         UnionGroup unionGroup = unionGroupService.findById(id);
         byte isDelete = 1;
@@ -44,7 +44,7 @@ public class UnionGroupController extends AdminBaseController{
         return ResultGenerator.genSuccessResult();
     }
 
-    @PutMapping
+    @PostMapping("/update")
     public Result update(UnionGroup unionGroup) {
         checkAdmin();
         if (StringUtils.isEmpty(unionGroup.getUnionId())) {
@@ -54,14 +54,14 @@ public class UnionGroupController extends AdminBaseController{
         return ResultGenerator.genSuccessResult();
     }
 
-    @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    @GetMapping("/detail")
+    public Result detail(@RequestParam(defaultValue = "0") Integer id) {
         checkAdmin();
         UnionGroup unionGroup = unionGroupService.findById(id);
         return ResultGenerator.genSuccessResult(unionGroup);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         checkAdmin();
         PageHelper.startPage(page, size);

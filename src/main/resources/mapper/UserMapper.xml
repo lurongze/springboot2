@@ -21,7 +21,10 @@
   </select>
   
   <select id="getList" resultMap="BaseResultMap">
-    SELECT u.*,un.union_name unionName FROM user u LEFT JOIN union_group un ON u.union_id = un.union_id WHERE u.is_delete = '0'
+    SELECT u.*,un.union_name unionName,ur.role_name roleName FROM user u
+    LEFT JOIN union_group un ON u.union_id = un.union_id
+    LEFT JOIN user_role ur ON u.role_id = ur.id
+    WHERE u.is_delete = '0'
     <if test="unionId != null and unionId != ''">
       AND u.union_id = #{unionId}
     </if>

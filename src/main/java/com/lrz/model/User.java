@@ -34,8 +34,22 @@ public class User {
     @Column(name = "is_delete")
     private Byte isDelete;
 
+    @Column(name = "role_id")
+    private Integer roleId;
+
     @Transient
     private String unionName;
+
+    @Transient
+    private String roleName;
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
     public String getUnionName() {
         return unionName;
@@ -173,5 +187,13 @@ public class User {
      */
     public void setIsDelete(Byte isDelete) {
         this.isDelete = isDelete;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 }

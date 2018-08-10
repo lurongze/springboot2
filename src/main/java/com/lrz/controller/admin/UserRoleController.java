@@ -3,12 +3,14 @@ package com.lrz.controller.admin;
 import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
 import com.lrz.model.UserRole;
+import com.lrz.service.RolePermissionService;
 import com.lrz.service.UserRoleService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Condition;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,21 +21,22 @@ import java.util.List;
 public class UserRoleController extends AdminBaseController{
 
     private final UserRoleService userRoleService;
+    private final RolePermissionService rolePermissionService;
     @Autowired
-    public UserRoleController(UserRoleService userRoleService) {
+    public UserRoleController(UserRoleService userRoleService, RolePermissionService rolePermissionService) {
         this.userRoleService = userRoleService;
+        this.rolePermissionService = rolePermissionService;
     }
 
 
-    @PostMapping
+    @PostMapping("/add")
     public Result add(UserRole userRole) {
-
         userRoleService.save(userRole);
         return ResultGenerator.genSuccessResult();
     }
 
-    @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    @PostMapping("/delete")
+    public Result delete(@RequestParam(defaultValue = "0") Integer id) {
         // userRoleService.deleteById(id);
         UserRole userRole = userRoleService.findById(id);
         byte isDelete = 1;
@@ -42,29 +45,31 @@ public class UserRoleController extends AdminBaseController{
         return ResultGenerator.genSuccessResult();
     }
 
-    @PutMapping
-    public Result update(UserRole userRole) {
+    @PostMapping("/update")
+    public Result update(UserRole userRole, @RequestParam(required = false) String permissionList) {
+        String[] permissionArray = permissionList.split("\\|");
+        List<String> values = Arrays.asList(permissionArray);
+        rolePermissionService.updatePermission(userRole.getId(), values);
         userRoleService.update(userRole);
         return ResultGenerator.genSuccessResult();
     }
 
-    @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    @GetMapping("/detail")
+    public Result detail(@RequestParam(defaultValue = "0") Integer id) {
         UserRole userRole = userRoleService.findById(id);
         return ResultGenerator.genSuccessResult(userRole);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         String orderBy = "sort_order ASC,id ASC";
         PageHelper.startPage(page, size, orderBy);
-        // List<UserRole> list = userRoleService.findAll();
         Condition condition = new Condition(UserRole.class);
         condition.createCriteria().andEqualTo("isDelete", "0");
         if (!checkAdminBoolean()) {
-            condition.and().andEqualTo("unionId", this.userInfo.getUnionId());
+            System.out.println(1);
         }
-        // condition.and().andEqualTo("fisuse" ,"1");
+        // condition.and().andEqualTo("unionId", this.userInfo.getUnionId());
         List<UserRole> list = userRoleService.findByCondition(condition);
         PageInfo pageInfo = new PageInfo<>(list);
         return ResultGenerator.genSuccessResult(pageInfo);

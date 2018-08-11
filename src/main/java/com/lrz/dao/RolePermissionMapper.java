@@ -11,4 +11,5 @@ import java.util.List;
 public interface RolePermissionMapper extends Mapper<RolePermission> {
     void addPermissions(@Param("roleId") Integer roleId, @Param("values") List values);
     void deletePermissions(@Param("roleId") Integer roleId);
+    List<RolePermission> checkPermission(@Param("roleId") Integer roleId, @Param("permission") String permission);
 }

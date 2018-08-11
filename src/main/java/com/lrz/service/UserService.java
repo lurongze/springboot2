@@ -13,4 +13,5 @@ public interface UserService extends Service<User> {
     void saveOpenUser(OpenUser openUser);
     User findByUserName(String userName);
     List<User> getList(String unionId);
+    Boolean checkPermission(Integer roleId, String permission);
 }

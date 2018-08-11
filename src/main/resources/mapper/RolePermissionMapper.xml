@@ -8,6 +8,10 @@
     <result column="role_id" jdbcType="INTEGER" property="roleId" />
     <result column="permission" jdbcType="VARCHAR" property="permission" />
   </resultMap>
+
+  <select id="checkPermission" resultMap="BaseResultMap">
+    SELECT id FROM role_permission WHERE role_id = #{roleId} AND permission = #{permission}
+  </select>
   
   <insert id="addPermissions">
     INSERT INTO role_permission(role_id,permission) VALUES 

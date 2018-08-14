@@ -2,6 +2,7 @@ package com.lrz.controller.admin;
 
 import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
+import com.lrz.model.RolePermission;
 import com.lrz.model.UserRole;
 import com.lrz.service.RolePermissionService;
 import com.lrz.service.UserRoleService;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Condition;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
 * Created by CodeGenerator on 2018/08/03.
@@ -37,7 +40,6 @@ public class UserRoleController extends AdminBaseController{
 
     @PostMapping("/delete")
     public Result delete(@RequestParam(defaultValue = "0") Integer id) {
-        // userRoleService.deleteById(id);
         UserRole userRole = userRoleService.findById(id);
         byte isDelete = 1;
         userRole.setIsDelete(isDelete);
@@ -57,7 +59,13 @@ public class UserRoleController extends AdminBaseController{
     @GetMapping("/detail")
     public Result detail(@RequestParam(defaultValue = "0") Integer id) {
         UserRole userRole = userRoleService.findById(id);
-        return ResultGenerator.genSuccessResult(userRole);
+        Condition condition = new Condition(RolePermission.class);
+        condition.createCriteria().andEqualTo("roleId", id);
+        List<RolePermission> permissionList = rolePermissionService.findByCondition(condition);
+        Map<String, Object> res = new HashMap<>(2);
+        res.put("userRole", userRole);
+        res.put("permissionList", permissionList);
+        return ResultGenerator.genSuccessResult(res);
     }
 
     @GetMapping("/list")
@@ -69,7 +77,6 @@ public class UserRoleController extends AdminBaseController{
         if (!checkAdminBoolean()) {
             System.out.println(1);
         }
-        // condition.and().andEqualTo("unionId", this.userInfo.getUnionId());
         List<UserRole> list = userRoleService.findByCondition(condition);
         PageInfo pageInfo = new PageInfo<>(list);
         return ResultGenerator.genSuccessResult(pageInfo);

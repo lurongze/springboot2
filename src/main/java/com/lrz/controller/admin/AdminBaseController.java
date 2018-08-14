@@ -31,9 +31,6 @@ public class AdminBaseController {
         // 拦截器解析判断的时候赋值给request userId 了，所以这里可以直接拿到
         this.userId = Integer.valueOf(httpServletRequest.getAttribute("userId").toString());
         this.userInfo = userService.findById(this.userId);
-        if (this.userInfo == null) {
-            throw new ServiceException("用户不存在");
-        }
         String authorization = httpServletRequest.getHeader("authorization");
         if (this.userInfo != null && !this.userInfo.getToken().equals(authorization)) {
             logger.info("beforeAction:", "token 和 用户不匹配");
@@ -43,8 +40,9 @@ public class AdminBaseController {
         if (this.userInfo != null && !systemAdminUserName.equals(this.userInfo.getUserName())) { // 非管理员
             String unionId = httpServletRequest.getHeader("union-id");
             checkUnion(unionId);
+            checkPermission(this.userInfo.getRoleId(), httpServletRequest.getRequestURI());
         }
-        checkPermission(this.userInfo.getRoleId(), httpServletRequest.getRequestURI());
+
     }
 
     /**
@@ -59,9 +57,9 @@ public class AdminBaseController {
     }
 
     public void checkAdmin() {
-        if (!systemAdminUserName.equals(this.userInfo.getUserName())) {
-            throw new ServiceException("无权限：201807271139-53");
-        }
+//        if (!systemAdminUserName.equals(this.userInfo.getUserName())) {
+//            throw new ServiceException("无权限：201807271139-53");
+//        }
     }
     // 检查权限
     public void checkPermission(Integer roleId, String permission) {

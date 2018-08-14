@@ -30,7 +30,7 @@ public class TokenInterceptor implements HandlerInterceptor {
             // GET请求不验证，要验证的都使用post，put等请求
             if("GET".equals(method) || "OPTIONS".equals(method)) {
                 return true;
-            }else{
+            } else {
                 String authorization = request.getHeader("authorization");
                 if(StringUtils.isEmpty(authorization)){
                     response.sendError(401);

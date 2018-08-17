@@ -29,6 +29,11 @@ public class MpIndexController extends MpBaseController{
         return ResultGenerator.genSuccessResult(session_key);
     }
 
+    @GetMapping("/tt")
+    public Result tt() {
+        return ResultGenerator.genSuccessResult("tt");
+    }
+
     /**
      * 获取用户微信信息
      * @param encryptedData

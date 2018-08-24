@@ -22,7 +22,7 @@ public class ${modelNameUpperCamel}Controller {
 
     private final ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
     @Autowired
-    public UserRoleController(${modelNameUpperCamel}Service ${modelNameLowerCamel}Service) {
+    public ${modelNameUpperCamel}Controller(${modelNameUpperCamel}Service ${modelNameLowerCamel}Service) {
         this.${modelNameLowerCamel}Service = ${modelNameLowerCamel}Service;
     }
 

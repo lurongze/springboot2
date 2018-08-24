@@ -49,18 +49,21 @@ public class TokenInterceptor implements HandlerInterceptor {
             // 登录和OPTIONS请求就不验证token了
             if(!"/admin/index/login".equals(URI) && !"OPTIONS".equals(request.getMethod().toUpperCase())) {
                 String authorization = request.getHeader("authorization");
+                logger.info("authorization:"+authorization);
                 if(StringUtils.isEmpty(authorization)){
                     response.sendError(401);
                     throw new ServiceException("请求必须要有authorization的header值");
                 }else {
                     // 开始判断token里面的信息，base64解码后等到内容和加密串。通过再次加密内容和加密串对比
                     String tokenInfo = HelperUtil.Base64Decode(authorization);
+                    logger.info("tokenInfo:"+tokenInfo);
                     JSONObject info = JSON.parseObject(tokenInfo);
                     String name = info.getString("name");
                     id = info.getString("id");
                     String sign = info.getString("sign");
                     String loginTime = info.getString("loginTime");
                     String IP = HelperUtil.getIpAddress(request);
+                    logger.info("IP:" + IP);
                     String encodeSign = HelperUtil.encodePassword( name + "*|*" + id + "*|*" + IP + "*|*" + loginTime);
                     if(!sign.equals(encodeSign)) {
                         response.sendError(401);

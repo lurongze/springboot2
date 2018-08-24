@@ -12,9 +12,11 @@ import com.lrz.utils.HelperUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.entity.Condition;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.*;
 
 /**
@@ -119,4 +121,30 @@ public class AdminIndexController extends AdminBaseController{
         }
         return permissionList;
     }
+
+    @PostMapping("/uploadImage")
+    public Result uploadImage(MultipartFile file) {
+        try {
+            // String uploadDir = request.getSession().getServletContext().getRealPath("/") + "upload/";
+            String uploadDir = "F:/workspace/java/index/src/upload/";
+            System.out.println("uploadDir:" + uploadDir);
+            File dir = new File(uploadDir);
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+            if (StringUtils.isNotEmpty(file.getOriginalFilename())) {
+                String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+                String filename = uploadDir + UUID.randomUUID().toString() + suffix;
+                File serverFile = new File(filename);
+                file.transferTo(serverFile);
+                return ResultGenerator.genSuccessResult(filename);
+            } else {
+                return ResultGenerator.genFailResult("文件名为空");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultGenerator.genFailResult("上传失败");
+        }
+    }
+
 }

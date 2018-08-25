@@ -15,7 +15,7 @@ import java.util.List;
 * Created by CodeGenerator on 2018/08/24.
 */
 @RestController
-@RequestMapping("/union/setting")
+@RequestMapping("/admin/union/setting")
 public class UnionSettingController extends AdminBaseController{
 
     private final UnionSettingService unionSettingService;
@@ -24,44 +24,33 @@ public class UnionSettingController extends AdminBaseController{
         this.unionSettingService = unionSettingService;
     }
 
-
-    @PostMapping("/add")
-    public Result add(UnionSetting unionSetting) {
-        unionSettingService.save(unionSetting);
-        return ResultGenerator.genSuccessResult();
-    }
-
-    @PostMapping("/delete")
-    public Result delete(@RequestParam(defaultValue = "0") Integer id) {
-        // unionSettingService.deleteById(id);
-        UnionSetting unionSetting = unionSettingService.findById(id);
-        byte isDelete = 1;
-        unionSetting.setIsDelete(isDelete);
-        unionSettingService.update(unionSetting);
-        return ResultGenerator.genSuccessResult();
-    }
-
     @PostMapping("/update")
-    public Result update(UnionSetting unionSetting) {
-        unionSettingService.update(unionSetting);
+    public Result update(@RequestParam String keyName, @RequestParam String keyValue, @RequestParam String title) {
+        Condition condition = new Condition(UnionSetting.class);
+        condition.createCriteria().andEqualTo("unionId", this.userInfo.getUnionId());
+        condition.and().andEqualTo("keyName", keyName);
+        List<UnionSetting> list = unionSettingService.findByCondition(condition);
+        if (list != null && list.size() > 0) {
+            UnionSetting unionSetting = list.get(0);
+            unionSetting.setKeyValue(keyValue);
+            unionSettingService.update(unionSetting);
+        } else {
+            UnionSetting newSetting = new UnionSetting();
+            newSetting.setUnionId(this.userInfo.getUnionId());
+            newSetting.setKeyName(keyName);
+            newSetting.setKeyValue(keyValue);
+            newSetting.setTitle(title);
+            unionSettingService.save(newSetting);
+        }
         return ResultGenerator.genSuccessResult();
-    }
-
-    @GetMapping("/detail")
-    public Result detail(@RequestParam(defaultValue = "0") Integer id) {
-        UnionSetting unionSetting = unionSettingService.findById(id);
-        return ResultGenerator.genSuccessResult(unionSetting);
     }
 
     @GetMapping("/list")
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
-        String orderBy = "id ASC";
-        PageHelper.startPage(page, size, orderBy);
+    public Result list() {
         Condition condition = new Condition(UnionSetting.class);
         condition.createCriteria().andEqualTo("unionId", "0");
         List<UnionSetting> list = unionSettingService.findByCondition(condition);
-        PageInfo pageInfo = new PageInfo<>(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessResult(list);
     }
 
     /**

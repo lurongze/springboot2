@@ -5,8 +5,10 @@ import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
 import com.lrz.core.ServiceException;
 import com.lrz.model.RolePermission;
+import com.lrz.model.UnionSetting;
 import com.lrz.model.User;
 import com.lrz.service.RolePermissionService;
+import com.lrz.service.UnionSettingService;
 import com.lrz.service.UserService;
 import com.lrz.utils.HelperUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -27,10 +29,12 @@ import java.util.*;
 public class AdminIndexController extends AdminBaseController{
     private final UserService userService;
     private final RolePermissionService rolePermissionService;
+    private final UnionSettingService unionSettingService;
     @Autowired
-    public AdminIndexController(UserService userService, RolePermissionService rolePermissionService) {
+    public AdminIndexController(UserService userService, RolePermissionService rolePermissionService,UnionSettingService unionSettingService) {
         this.userService = userService;
         this.rolePermissionService = rolePermissionService;
+        this.unionSettingService = unionSettingService;
     }
 
     @GetMapping("/index")
@@ -97,6 +101,7 @@ public class AdminIndexController extends AdminBaseController{
                 res.put("token", token);
                 res.put("userName", user.getUserName());
                 res.put("unionId", user.getUnionId());
+                res.put("unionSetting", getUnionSetting(user.getUnionId()));
                 if ("lurongze".equals(user.getUserName())) {
                     res.put("permissionList", "systemAdmin");
                 } else {
@@ -120,6 +125,12 @@ public class AdminIndexController extends AdminBaseController{
             permissionList.add(item.getPermission());
         }
         return permissionList;
+    }
+
+    public List<UnionSetting> getUnionSetting(String unionId) {
+        Condition condition = new Condition(UnionSetting.class);
+        condition.createCriteria().andEqualTo("unionId", unionId);
+        return unionSettingService.findByCondition(condition);
     }
 
     @PostMapping("/uploadImage")

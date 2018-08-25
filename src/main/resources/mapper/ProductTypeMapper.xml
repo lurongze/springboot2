@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lrz.dao.ProductTypeMapper">
+  <resultMap id="BaseResultMap" type="com.lrz.model.ProductType">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="union_id" jdbcType="VARCHAR" property="unionId" />
+    <result column="cate_name" jdbcType="VARCHAR" property="cateName" />
+    <result column="cate_logo" jdbcType="VARCHAR" property="cateLogo" />
+    <result column="is_show" jdbcType="TINYINT" property="isShow" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="sort_order" jdbcType="INTEGER" property="sortOrder" />
+  </resultMap>
+</mapper>

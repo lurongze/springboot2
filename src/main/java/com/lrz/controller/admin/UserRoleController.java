@@ -8,6 +8,7 @@ import com.lrz.service.RolePermissionService;
 import com.lrz.service.UserRoleService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Condition;
@@ -88,7 +89,11 @@ public class UserRoleController extends AdminBaseController{
     @GetMapping("/entity")
     public Result entity() {
         UserRole userRoleEntity = new UserRole();
-        userRoleEntity.setUnionId("0");
+        if(StringUtils.isNotEmpty(this.userInfo.getUnionId())) {
+            userRoleEntity.setUnionId(this.userInfo.getUnionId());
+        } else {
+            userRoleEntity.setUnionId("0");
+        }
         return ResultGenerator.genSuccessResult(userRoleEntity);
     }
 }

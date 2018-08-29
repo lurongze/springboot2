@@ -6,6 +6,7 @@ import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
 import com.lrz.model.ProductType;
 import com.lrz.service.ProductTypeService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Condition;
@@ -17,7 +18,7 @@ import java.util.List;
 */
 @RestController
 @RequestMapping("/admin/product/type")
-public class ProductTypeController {
+public class ProductTypeController extends AdminBaseController{
 
     private final ProductTypeService productTypeService;
     @Autowired
@@ -58,10 +59,8 @@ public class ProductTypeController {
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         String orderBy = "id ASC";
         PageHelper.startPage(page, size, orderBy);
-        // List<ProductType> list = productTypeService.findAll();
         Condition condition = new Condition(ProductType.class);
         condition.createCriteria().andEqualTo("isDelete", "0");
-        // condition.and().andEqualTo("fisuse" ,"1");
         List<ProductType> list = productTypeService.findByCondition(condition);
         PageInfo pageInfo = new PageInfo<>(list);
         return ResultGenerator.genSuccessResult(pageInfo);
@@ -75,6 +74,12 @@ public class ProductTypeController {
         ProductType productTypeEntity = new ProductType();
         byte isShow = 1;
         productTypeEntity.setUnionId("0");
+        if(StringUtils.isNotEmpty(this.userInfo.getUnionId())) {
+            productTypeEntity.setUnionId(this.userInfo.getUnionId());
+        } else {
+            productTypeEntity.setUnionId("0");
+        }
+        productTypeEntity.setSortOrder(50);
         productTypeEntity.setIsShow(isShow);
         return ResultGenerator.genSuccessResult(productTypeEntity);
     }

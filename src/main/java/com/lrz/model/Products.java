@@ -1,7 +1,11 @@
 package com.lrz.model;
 
+import java.util.Date;
 import javax.persistence.*;
 
+/**
+ *
+ */
 public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +49,6 @@ public class Products {
     /**
      * 总库存
      */
-    @Column(name = "stock")
     private Integer stock;
 
     @Column(name = "is_show")
@@ -61,12 +64,40 @@ public class Products {
     private Byte isDelete;
 
     @Column(name = "created_at")
-    private Integer createdAt;
+    private Date createdAt;
+
+    @Column(name = "sort_order")
+    private Integer sortOrder;
+
+    /**
+     * 轮播图
+     */
+    @Column(name = "picture_list")
+    private String pictureList;
+
+
+    @Transient
+    private Integer catePid;
+
+    public String getPictureList() {
+        return pictureList;
+    }
+
+    public void setPictureList(String pictureList) {
+        this.pictureList = pictureList;
+    }
+
+    public Integer getCatePid() {
+        return catePid;
+    }
+
+    public void setCatePid(Integer catePid) {
+        this.catePid = catePid;
+    }
 
     /**
      * 商品描述
      */
-    @Column(name = "description")
     private String description;
 
     /**
@@ -272,15 +303,29 @@ public class Products {
     /**
      * @return created_at
      */
-    public Integer getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
     /**
      * @param createdAt
      */
-    public void setCreatedAt(Integer createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    /**
+     * @return sort_order
+     */
+    public Integer getSortOrder() {
+        return sortOrder;
+    }
+
+    /**
+     * @param sortOrder
+     */
+    public void setSortOrder(Integer sortOrder) {
+        this.sortOrder = sortOrder;
     }
 
     /**

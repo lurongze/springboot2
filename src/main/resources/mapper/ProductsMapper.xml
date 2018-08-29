@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lrz.common.dao.ProductsMapper">
+<mapper namespace="com.lrz.dao.ProductsMapper">
   <resultMap id="BaseResultMap" type="com.lrz.model.Products">
     <!--
       WARNING - @mbg.generated
@@ -17,7 +17,8 @@
     <result column="is_show" jdbcType="TINYINT" property="isShow" />
     <result column="is_recommend" jdbcType="TINYINT" property="isRecommend" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
-    <result column="created_at" jdbcType="INTEGER" property="createdAt" />
+    <result column="created_at" jdbcType="DATE" property="createdAt" />
+    <result column="sort_order" jdbcType="INTEGER" property="sortOrder" />
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
   </resultMap>
 </mapper>

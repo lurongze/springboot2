@@ -32,6 +32,17 @@ public class ProductType {
     @Column(name = "sort_order")
     private Integer sortOrder;
 
+    @Column(name = "pid")
+    private Integer pid;
+
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
+    }
+
     /**
      * @return id
      */

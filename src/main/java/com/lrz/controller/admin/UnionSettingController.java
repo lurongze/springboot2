@@ -6,6 +6,7 @@ import com.lrz.model.UnionSetting;
 import com.lrz.service.UnionSettingService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Condition;
@@ -59,7 +60,11 @@ public class UnionSettingController extends AdminBaseController{
     @GetMapping("/entity")
     public Result entity() {
         UnionSetting unionSettingEntity = new UnionSetting();
-        unionSettingEntity.setUnionId("0");
+        if(StringUtils.isNotEmpty(this.userInfo.getUnionId())) {
+            unionSettingEntity.setUnionId(this.userInfo.getUnionId());
+        } else {
+            unionSettingEntity.setUnionId("0");
+        }
         return ResultGenerator.genSuccessResult(unionSettingEntity);
     }
 }

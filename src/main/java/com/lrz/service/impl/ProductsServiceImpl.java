@@ -15,7 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Service
 @Transactional
 public class ProductsServiceImpl extends AbstractService<Products> implements ProductsService {
+    private final ProductsMapper productsMapper;
     @Autowired
-    private ProductsMapper productsMapper;
+    public ProductsServiceImpl(ProductsMapper productsMapper) {
+        this.productsMapper = productsMapper;
+    }
 
+    public Integer insert(Products products){
+        return productsMapper.insert(products);
+    }
 }

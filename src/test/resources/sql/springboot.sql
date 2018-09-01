@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 5.5.53, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: springboot
 -- ------------------------------------------------------
--- Server version	8.0.11
+-- Server version	8.0.12
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+ SET NAMES utf8mb4 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `open_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `open_user` (
   `appid` varchar(50) DEFAULT NULL,
   `openid` varchar(50) DEFAULT NULL,
@@ -49,7 +49,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `product_specification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `product_specification` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) DEFAULT NULL COMMENT '关联的产品id',
@@ -60,7 +60,7 @@ CREATE TABLE `product_specification` (
   `is_show` tinyint(4) DEFAULT '1',
   `is_delete` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='产品规格';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='产品规格';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,6 +69,7 @@ CREATE TABLE `product_specification` (
 
 LOCK TABLES `product_specification` WRITE;
 /*!40000 ALTER TABLE `product_specification` DISABLE KEYS */;
+INSERT INTO `product_specification` VALUES (7,1,'规格1',2,1,3,1,0),(8,1,'规格2',22,12,33,1,0),(9,1,'111',0,0,0,1,1),(10,1,'123123',2,1,1,1,0),(11,3,'12323',0,0,0,1,0),(12,NULL,'12323',2,1,3,1,0),(13,NULL,'xxxx',1,1,1,1,0),(14,NULL,'123',1,1,0,1,0),(15,7,'wwwwwwww',7,8,5,1,0);
 /*!40000 ALTER TABLE `product_specification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,7 +79,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `product_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `product_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `union_id` varchar(50) NOT NULL,
@@ -108,7 +109,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `union_id` varchar(50) NOT NULL COMMENT '组织id',
@@ -127,7 +128,7 @@ CREATE TABLE `products` (
   `sort_order` int(11) DEFAULT '50',
   `picture_list` varchar(2000) DEFAULT NULL COMMENT '轮播图',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='商品表';
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='商品表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +137,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'0','12312','https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/40735f06-6944-4db8-8e4f-f4a7881871db.png',4,2,3,'商品简述\n','商品详情\n',1,1,0,0,'2018-08-29 00:00:00',50,'[{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/50d99ae3-b80c-461d-953c-6bc138cf3668.png\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/50d99ae3-b80c-461d-953c-6bc138cf3668.png\",\"uid\":1535534222947,\"status\":\"success\"},{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/8bdaa536-33f1-41f8-8d21-96fe15eb7c16.jpg\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/8bdaa536-33f1-41f8-8d21-96fe15eb7c16.jpg\"}]'),(2,'0','12312','https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/3b873773-00cb-43c7-bc2b-41c2d148b754.png',6,463,542,'123131','12313123',1,1,0,0,'2018-08-29 11:52:15',50,'[{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/a4118ec4-35ec-46e9-83a2-118099f4a840.png\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/a4118ec4-35ec-46e9-83a2-118099f4a840.png\",\"uid\":1535534774485,\"status\":\"success\"},{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/b8f21aff-46a6-43b6-a5c1-461437c553b9.png\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/b8f21aff-46a6-43b6-a5c1-461437c553b9.png\"}]');
+INSERT INTO `products` VALUES (1,'0','123123','https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/40735f06-6944-4db8-8e4f-f4a7881871db.png',4,2,3,'商品简述\n','商品详情\n',1,1,0,0,'2018-08-29 00:00:00',50,'[{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/50d99ae3-b80c-461d-953c-6bc138cf3668.png\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/50d99ae3-b80c-461d-953c-6bc138cf3668.png\",\"uid\":1535534222947,\"status\":\"success\"},{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/8bdaa536-33f1-41f8-8d21-96fe15eb7c16.jpg\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/8bdaa536-33f1-41f8-8d21-96fe15eb7c16.jpg\"}]'),(2,'0','12312','https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/3b873773-00cb-43c7-bc2b-41c2d148b754.png',6,463,542,'123131','12313123',1,1,0,0,'2018-08-29 11:52:15',50,'[{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/a4118ec4-35ec-46e9-83a2-118099f4a840.png\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/a4118ec4-35ec-46e9-83a2-118099f4a840.png\",\"uid\":1535534774485,\"status\":\"success\"},{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/b8f21aff-46a6-43b6-a5c1-461437c553b9.png\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/b8f21aff-46a6-43b6-a5c1-461437c553b9.png\"}]'),(3,'0','123123','',4,0,0,'123','123213',1,1,0,1,'2018-09-01 14:03:23',50,'[]'),(4,'0','xxx','',5,0,0,'123','123123',0,1,0,1,'2018-09-01 14:04:24',50,'[]'),(5,'0','xxxxx','',4,0,0,'qeqweq','weqweqwe',0,1,0,1,'2018-09-01 14:30:48',50,'[]'),(6,'0','123123','',4,0,0,'12313','123123',0,1,0,1,'2018-09-01 14:34:24',50,'[]'),(7,'0','wwwwwwwww','',4,0,0,'wqeqe','qweqweqwe',0,1,0,0,'2018-09-01 14:42:29',50,'[]');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +147,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `role_permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `role_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_id` int(11) NOT NULL COMMENT '角色id',
@@ -171,7 +172,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `union_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `union_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `union_name` varchar(150) DEFAULT NULL COMMENT '组织名称',
@@ -200,7 +201,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `union_setting`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `union_setting` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `union_id` varchar(50) NOT NULL,
@@ -227,7 +228,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `user` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(100) NOT NULL,
@@ -249,7 +250,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'lurongze','','','F730FD868D1550C7B41D783DD67FE6FF',1529748103,'eyJsb2dpblRpbWUiOjE1MzU3MDQwMDcsIm5hbWUiOiJsdXJvbmd6ZSIsInNpZ24iOiI4MTA3NkE4N0I0NUZCNTlGN0M5OTY0NjcwMzNBRjQxQSIsImlkIjoxfQ==','0',0,0),(2,'陆荣泽4','1946755280@qq.com','广州市','21312312',NULL,'','0',1,0),(3,'AAAA','AAAA','AAQWEQ','41D58883E50B53870FCA159FCEF8A1F8',1531195985,'','0',1,0),(4,'小明','123123','123123','67BDE276A6182E41FDF7DC7F629A1114',1531210264,'','0',1,0),(5,'小红','123123','12312','5C7384FD5D8572DA2EDA746E7F2B51E4',1531213557,'','0',1,0),(6,'22222','111','1111','FC9D41C66E354D20D799ECB0F60C2C64',1531217321,'','0',1,0),(7,'1231231','123123','12312313','1C1A76F3B72AB40FAB215B623CAB21F6',1532657165,'','0',1,0),(8,'lrz','lrz@qq.com','广州市','F730FD868D1550C7B41D783DD67FE6FF',1532657262,'eyJsb2dpblRpbWUiOjE1MzQyMzUwMDEsIm5hbWUiOiJscnoiLCJzaWduIjoiMkNFOUQ5NzFEQkIwNzBGNjQ3QkZGRTkwRTY5MkM5QUEiLCJpZCI6OH0=','18a411e4-30d1-40cf-ad25-5a579cbd5edf',0,2),(9,'12312312313','12313','12313','A29FB138C6EBB76D7D94D9E9F5800389',1532657267,'','0',1,0),(10,'12312312','312312312312','3123123123','5219A99933DD63BB2A5AC74214E462F3',1532657317,'','0',1,0);
+INSERT INTO `user` VALUES (1,'lurongze','','','F730FD868D1550C7B41D783DD67FE6FF',1529748103,'eyJsb2dpblRpbWUiOjE1MzU3ODMzMTksIm5hbWUiOiJsdXJvbmd6ZSIsInNpZ24iOiIyRTdGMjNFMTgwODAxQTFEODU0NjBDNkUxNTRBQzAzOSIsImlkIjoxfQ==','0',0,0),(2,'陆荣泽4','1946755280@qq.com','广州市','21312312',NULL,'','0',1,0),(3,'AAAA','AAAA','AAQWEQ','41D58883E50B53870FCA159FCEF8A1F8',1531195985,'','0',1,0),(4,'小明','123123','123123','67BDE276A6182E41FDF7DC7F629A1114',1531210264,'','0',1,0),(5,'小红','123123','12312','5C7384FD5D8572DA2EDA746E7F2B51E4',1531213557,'','0',1,0),(6,'22222','111','1111','FC9D41C66E354D20D799ECB0F60C2C64',1531217321,'','0',1,0),(7,'1231231','123123','12312313','1C1A76F3B72AB40FAB215B623CAB21F6',1532657165,'','0',1,0),(8,'lrz','lrz@qq.com','广州市','F730FD868D1550C7B41D783DD67FE6FF',1532657262,'eyJsb2dpblRpbWUiOjE1MzQyMzUwMDEsIm5hbWUiOiJscnoiLCJzaWduIjoiMkNFOUQ5NzFEQkIwNzBGNjQ3QkZGRTkwRTY5MkM5QUEiLCJpZCI6OH0=','18a411e4-30d1-40cf-ad25-5a579cbd5edf',0,2),(9,'12312312313','12313','12313','A29FB138C6EBB76D7D94D9E9F5800389',1532657267,'','0',1,0),(10,'12312312','312312312312','3123123123','5219A99933DD63BB2A5AC74214E462F3',1532657317,'','0',1,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +260,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `user_role` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `union_id` varchar(20) NOT NULL,
@@ -289,4 +290,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-31 18:30:08
+-- Dump completed on 2018-09-01 14:49:11

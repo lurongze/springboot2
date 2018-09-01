@@ -79,6 +79,17 @@ public class Products {
     @Transient
     private Integer catePid;
 
+    @Transient
+    private String specifications;
+
+    public String getSpecifications() {
+        return specifications;
+    }
+
+    public void setSpecifications(String specifications) {
+        this.specifications = specifications;
+    }
+
     public String getPictureList() {
         return pictureList;
     }

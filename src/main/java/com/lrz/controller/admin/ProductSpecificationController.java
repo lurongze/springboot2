@@ -15,7 +15,7 @@ import java.util.List;
 * Created by CodeGenerator on 2018/08/31.
 */
 @RestController
-@RequestMapping("/product/specification")
+@RequestMapping("admin/product/specification")
 public class ProductSpecificationController {
 
     private final ProductSpecificationService productSpecificationService;
@@ -72,7 +72,6 @@ public class ProductSpecificationController {
     @GetMapping("/entity")
     public Result entity() {
         ProductSpecification productSpecificationEntity = new ProductSpecification();
-        productSpecificationEntity.setUnionId("0");
         return ResultGenerator.genSuccessResult(productSpecificationEntity);
     }
 }

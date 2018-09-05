@@ -13,9 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 public class MpBaseController {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     // 小程序sessionKey
-    protected String sessionKey;
-    protected String AppId;
-    protected String AppSecret;
+    public String sessionKey;
+    public String AppId;
+    public String AppSecret;
+    public String unionId;
     @Autowired
     private HttpServletRequest httpServletRequest;
     @Autowired
@@ -31,6 +32,7 @@ public class MpBaseController {
         // 获取appID，再根据appID获取app secret
         this.AppId = httpServletRequest.getHeader("appid");
         this.AppSecret = "cf205e9d65c810c0f41c16bea666673f";
+        this.unionId = httpServletRequest.getHeader("union-id");
         this.logger.info("this.sessionKey:" + this.sessionKey + "\n this.AppId:" + this.AppId + "\n this.AppSecret:" + this.AppSecret);
     }
 

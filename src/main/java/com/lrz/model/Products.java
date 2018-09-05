@@ -82,12 +82,23 @@ public class Products {
     @Transient
     private String cateName;
 
+    @Transient
+    private String specifications;
+
     public String getCateName() {
         return cateName;
     }
 
     public void setCateName(String cateName) {
         this.cateName = cateName;
+    }
+
+    public String getSpecifications() {
+        return specifications;
+    }
+
+    public void setSpecifications(String specifications) {
+        this.specifications = specifications;
     }
 
     public String getPictureList() {

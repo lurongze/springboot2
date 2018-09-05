@@ -60,7 +60,7 @@ CREATE TABLE `product_specification` (
   `is_show` tinyint(4) DEFAULT '1',
   `is_delete` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='产品规格';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='产品规格';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,6 +69,7 @@ CREATE TABLE `product_specification` (
 
 LOCK TABLES `product_specification` WRITE;
 /*!40000 ALTER TABLE `product_specification` DISABLE KEYS */;
+INSERT INTO `product_specification` VALUES (1,1,'白色64G',100,250000,0,1,0),(2,1,'黑色64G',100,260000,0,1,0),(3,2,'白色500G',100,600000,0,1,0),(4,2,'黑色500G',100,600000,0,1,0);
 /*!40000 ALTER TABLE `product_specification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +90,7 @@ CREATE TABLE `product_type` (
   `sort_order` int(11) DEFAULT '50',
   `pid` int(11) DEFAULT '0' COMMENT '父id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='产品分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='产品分类表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +99,7 @@ CREATE TABLE `product_type` (
 
 LOCK TABLES `product_type` WRITE;
 /*!40000 ALTER TABLE `product_type` DISABLE KEYS */;
-INSERT INTO `product_type` VALUES (1,'0','衣服','https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/2fb7bf72-ce6d-44d4-ad55-25c6b92b91b9.png',1,0,50,0),(2,'0','123123','12312312',1,1,50,0),(3,'0','分类1','https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/ef7aa958-453f-4cf3-81f9-983cabb71173.png',0,0,50,0),(4,'0','3333333333333vvv','https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/283c6749-e85e-4e67-b563-dd62b2227bd4.png',0,0,50,1),(5,'0','vvvv','',1,0,50,1),(6,'0','hahahh333','https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/1e0ba09e-8412-4f5f-809e-c429a2baa591.jpg',1,0,52,3);
+INSERT INTO `product_type` VALUES (1,'0','手机','',1,0,50,0),(2,'0','123123','12312312',1,1,50,0),(3,'0','电脑','',1,0,50,0),(4,'0','苹果','',1,0,50,1),(5,'0','华为','',1,0,50,1),(6,'0','苹果','',1,0,52,3),(7,'0','联想','',1,0,50,1),(8,'0','联想','',1,0,50,3),(9,'0','华硕','',1,0,50,3);
 /*!40000 ALTER TABLE `product_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +137,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'0','12312','https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/40735f06-6944-4db8-8e4f-f4a7881871db.png',4,2,3,'商品简述\n','商品详情\n',1,1,0,0,'2018-08-29 00:00:00',50,'[{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/50d99ae3-b80c-461d-953c-6bc138cf3668.png\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/50d99ae3-b80c-461d-953c-6bc138cf3668.png\",\"uid\":1535534222947,\"status\":\"success\"},{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/8bdaa536-33f1-41f8-8d21-96fe15eb7c16.jpg\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/8bdaa536-33f1-41f8-8d21-96fe15eb7c16.jpg\"}]'),(2,'0','12312','https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/3b873773-00cb-43c7-bc2b-41c2d148b754.png',6,463,542,'123131','12313123',1,1,0,0,'2018-08-29 11:52:15',50,'[{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/a4118ec4-35ec-46e9-83a2-118099f4a840.png\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/a4118ec4-35ec-46e9-83a2-118099f4a840.png\",\"uid\":1535534774485,\"status\":\"success\"},{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/b8f21aff-46a6-43b6-a5c1-461437c553b9.png\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/b8f21aff-46a6-43b6-a5c1-461437c553b9.png\"}]');
+INSERT INTO `products` VALUES (1,'0','IPHONE SE','https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/50d9c40e-9698-4671-946d-b548061178e0.jpg',4,150000,180000,'iPhone se 最新版','国行版iPhone SE 非常不错',6,1,0,0,'2018-08-29 00:00:00',50,'[{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/9cf12d07-1893-4ddc-9c71-002c74f909d8.jpg\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/9cf12d07-1893-4ddc-9c71-002c74f909d8.jpg\",\"uid\":1536137051080,\"status\":\"success\"},{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/2e784628-c543-45e2-a820-50048df8a51f.jpg\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/2e784628-c543-45e2-a820-50048df8a51f.jpg\",\"uid\":1536137054003,\"status\":\"success\"},{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/7d217c0b-e91f-436e-8fb6-0670f3294a8f.jpg\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/7d217c0b-e91f-436e-8fb6-0670f3294a8f.jpg\"}]'),(2,'0','联想book','https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/579c4e7d-43df-40f4-8344-4a892d4e1852.jpg',8,500000,900000,'联想笔记本','联想THINKPAD，工业品质',1,1,0,0,'2018-08-29 11:52:15',50,'[{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/fc4c380f-4f7b-4d08-adc8-6eacc7bf78c9.jpg\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/fc4c380f-4f7b-4d08-adc8-6eacc7bf78c9.jpg\",\"uid\":1536138713125,\"status\":\"success\"},{\"name\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/df1588bd-8297-44dc-8c79-44213dc22830.jpg\",\"url\":\"https://vue-1253286615.cos.ap-guangzhou.myqcloud.com/df1588bd-8297-44dc-8c79-44213dc22830.jpg\"}]');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,7 +250,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'lurongze','','','F730FD868D1550C7B41D783DD67FE6FF',1529748103,'eyJsb2dpblRpbWUiOjE1MzU3MDQwMDcsIm5hbWUiOiJsdXJvbmd6ZSIsInNpZ24iOiI4MTA3NkE4N0I0NUZCNTlGN0M5OTY0NjcwMzNBRjQxQSIsImlkIjoxfQ==','0',0,0),(2,'陆荣泽4','1946755280@qq.com','广州市','21312312',NULL,'','0',1,0),(3,'AAAA','AAAA','AAQWEQ','41D58883E50B53870FCA159FCEF8A1F8',1531195985,'','0',1,0),(4,'小明','123123','123123','67BDE276A6182E41FDF7DC7F629A1114',1531210264,'','0',1,0),(5,'小红','123123','12312','5C7384FD5D8572DA2EDA746E7F2B51E4',1531213557,'','0',1,0),(6,'22222','111','1111','FC9D41C66E354D20D799ECB0F60C2C64',1531217321,'','0',1,0),(7,'1231231','123123','12312313','1C1A76F3B72AB40FAB215B623CAB21F6',1532657165,'','0',1,0),(8,'lrz','lrz@qq.com','广州市','F730FD868D1550C7B41D783DD67FE6FF',1532657262,'eyJsb2dpblRpbWUiOjE1MzQyMzUwMDEsIm5hbWUiOiJscnoiLCJzaWduIjoiMkNFOUQ5NzFEQkIwNzBGNjQ3QkZGRTkwRTY5MkM5QUEiLCJpZCI6OH0=','18a411e4-30d1-40cf-ad25-5a579cbd5edf',0,2),(9,'12312312313','12313','12313','A29FB138C6EBB76D7D94D9E9F5800389',1532657267,'','0',1,0),(10,'12312312','312312312312','3123123123','5219A99933DD63BB2A5AC74214E462F3',1532657317,'','0',1,0);
+INSERT INTO `user` VALUES (1,'lurongze','','','F730FD868D1550C7B41D783DD67FE6FF',1529748103,'eyJsb2dpblRpbWUiOjE1MzYxMzgwNjEsIm5hbWUiOiJsdXJvbmd6ZSIsInNpZ24iOiJBNzU2N0JENDJGRDRCNTQ0QTM5RUY1MDFDQkY2QjQ4RiIsImlkIjoxfQ==','0',0,0),(2,'陆荣泽4','1946755280@qq.com','广州市','21312312',NULL,'','0',1,0),(3,'AAAA','AAAA','AAQWEQ','41D58883E50B53870FCA159FCEF8A1F8',1531195985,'','0',1,0),(4,'小明','123123','123123','67BDE276A6182E41FDF7DC7F629A1114',1531210264,'','0',1,0),(5,'小红','123123','12312','5C7384FD5D8572DA2EDA746E7F2B51E4',1531213557,'','0',1,0),(6,'22222','111','1111','FC9D41C66E354D20D799ECB0F60C2C64',1531217321,'','0',1,0),(7,'1231231','123123','12312313','1C1A76F3B72AB40FAB215B623CAB21F6',1532657165,'','0',1,0),(8,'lrz','lrz@qq.com','广州市','F730FD868D1550C7B41D783DD67FE6FF',1532657262,'eyJsb2dpblRpbWUiOjE1MzQyMzUwMDEsIm5hbWUiOiJscnoiLCJzaWduIjoiMkNFOUQ5NzFEQkIwNzBGNjQ3QkZGRTkwRTY5MkM5QUEiLCJpZCI6OH0=','18a411e4-30d1-40cf-ad25-5a579cbd5edf',0,2),(9,'12312312313','12313','12313','A29FB138C6EBB76D7D94D9E9F5800389',1532657267,'','0',1,0),(10,'12312312','312312312312','3123123123','5219A99933DD63BB2A5AC74214E462F3',1532657317,'','0',1,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,4 +290,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-31 18:30:08
+-- Dump completed on 2018-09-05 18:08:54

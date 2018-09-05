@@ -1,18 +1,22 @@
 package com.lrz.controller.admin;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
 import com.lrz.model.ProductType;
 import com.lrz.model.Products;
+import com.lrz.model.ProductSpecification;
 import com.lrz.service.ProductTypeService;
 import com.lrz.service.ProductsService;
+import com.lrz.service.ProductSpecificationService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Condition;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,18 +29,31 @@ public class ProductsController extends AdminBaseController{
 
     private final ProductsService productsService;
     private final ProductTypeService productTypeService;
+    private final ProductSpecificationService productSpecificationService;
     @Autowired
-    public ProductsController(ProductsService productsService, ProductTypeService productTypeService) {
+    public ProductsController(ProductsService productsService, ProductTypeService productTypeService, ProductSpecificationService productSpecificationService) {
         this.productsService = productsService;
         this.productTypeService = productTypeService;
+        this.productSpecificationService = productSpecificationService;
     }
 
 
     @PostMapping("/add")
     public Result add(Products products) {
         Date createdAt = new Date();
+        byte isDelete = 0;
         products.setCreatedAt(createdAt);
+        products.setIsDelete(isDelete);
         productsService.save(products);
+        if(StringUtils.isNotEmpty(products.getSpecifications())) {
+            List<ProductSpecification> list = JSON.parseArray(products.getSpecifications(), ProductSpecification.class);
+            List<ProductSpecification> saveList = new ArrayList<>();
+            for (ProductSpecification item:list) {
+                item.setProductId(products.getId());
+                saveList.add(item);
+            }
+            productSpecificationService.save(saveList);
+        }
         return ResultGenerator.genSuccessResult();
     }
 
@@ -53,6 +70,10 @@ public class ProductsController extends AdminBaseController{
     @PostMapping("/update")
     public Result update(Products products) {
         productsService.update(products);
+        if(StringUtils.isNotEmpty(products.getSpecifications())) {
+            List<ProductSpecification> list = JSON.parseArray(products.getSpecifications(), ProductSpecification.class);
+            productSpecificationService.save(list);
+        }
         return ResultGenerator.genSuccessResult();
     }
 
@@ -60,17 +81,31 @@ public class ProductsController extends AdminBaseController{
     public Result detail(@RequestParam(defaultValue = "0") Integer id) {
         Products products = productsService.findById(id);
         ProductType productType = productTypeService.findById(products.getCid());
+        Condition condition = new Condition(ProductSpecification.class);
+        condition.createCriteria().andEqualTo("productId", id);
+        condition.and().andEqualTo("isDelete", 0);
+        List<ProductSpecification> specifications = productSpecificationService.findByCondition(condition);
         products.setCatePid(productType.getPid());
+        products.setSpecifications(JSON.toJSONString(specifications));
         return ResultGenerator.genSuccessResult(products);
     }
 
     @GetMapping("/list")
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public Result list(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "0") Integer size,
+            @RequestParam(defaultValue = "0") Integer cid
+            ) {
         String orderBy = "id ASC";
         PageHelper.startPage(page, size, orderBy);
         Condition condition = new Condition(Products.class);
         condition.createCriteria().andEqualTo("isDelete", "0");
-        List<Products> list = productsService.getList(this.userInfo.getUnionId(), null, null, null);
+        List<Products> list;
+        if (cid > 0) {
+            list = productsService.getList(this.userInfo.getUnionId(), cid, null, null);
+        } else {
+            list = productsService.getList(this.userInfo.getUnionId(), null, null, null);
+        }
         PageInfo pageInfo = new PageInfo<>(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

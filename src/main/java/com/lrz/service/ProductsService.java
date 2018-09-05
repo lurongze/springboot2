@@ -12,4 +12,5 @@ public interface ProductsService extends Service<Products> {
 
     List<Products> getList(String unionId,Integer cid, Integer isShow, Integer isRecommend);
 
+    Integer insert(Products products);
 }

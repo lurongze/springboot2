@@ -15,7 +15,7 @@ import java.util.List;
 * Created by CodeGenerator on 2018/08/31.
 */
 @RestController
-@RequestMapping("/product/specification")
+@RequestMapping("admin/product/specification")
 public class ProductSpecificationController {
 
     private final ProductSpecificationService productSpecificationService;

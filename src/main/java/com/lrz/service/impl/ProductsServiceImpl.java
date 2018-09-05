@@ -18,8 +18,8 @@ import java.util.List;
 @Transactional
 public class ProductsServiceImpl extends AbstractService<Products> implements ProductsService {
 
-    private final ProductsMapper productsMapper;
 
+    private final ProductsMapper productsMapper;
     @Autowired
     public ProductsServiceImpl(ProductsMapper productsMapper) {
         this.productsMapper = productsMapper;
@@ -29,4 +29,7 @@ public class ProductsServiceImpl extends AbstractService<Products> implements Pr
         return productsMapper.getList(unionId, cid, isShow, isRecommend);
     }
 
+    public Integer insert(Products products){
+        return productsMapper.insert(products);
+    }
 }

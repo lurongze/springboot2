@@ -72,7 +72,6 @@ public class ProductSpecificationController {
     @GetMapping("/entity")
     public Result entity() {
         ProductSpecification productSpecificationEntity = new ProductSpecification();
-        productSpecificationEntity.setUnionId("0");
         return ResultGenerator.genSuccessResult(productSpecificationEntity);
     }
 }

@@ -70,7 +70,7 @@ public class ProductsController extends AdminBaseController{
         PageHelper.startPage(page, size, orderBy);
         Condition condition = new Condition(Products.class);
         condition.createCriteria().andEqualTo("isDelete", "0");
-        List<Products> list = productsService.findByCondition(condition);
+        List<Products> list = productsService.getList(this.userInfo.getUnionId(), null, null, null);
         PageInfo pageInfo = new PageInfo<>(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

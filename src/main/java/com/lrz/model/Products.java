@@ -79,6 +79,17 @@ public class Products {
     @Transient
     private Integer catePid;
 
+    @Transient
+    private String cateName;
+
+    public String getCateName() {
+        return cateName;
+    }
+
+    public void setCateName(String cateName) {
+        this.cateName = cateName;
+    }
+
     public String getPictureList() {
         return pictureList;
     }

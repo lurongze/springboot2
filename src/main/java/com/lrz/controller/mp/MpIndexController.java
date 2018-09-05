@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/mp/index")
 public class MpIndexController extends MpBaseController{
 
+    private final MiniService miniService;
+
     @Autowired
-    MiniService miniService;
+    public MpIndexController(MiniService miniService) {
+        this.miniService = miniService;
+    }
 
     /**
      * code登录获取微信sessionKey

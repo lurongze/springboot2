@@ -21,4 +21,17 @@
     <result column="sort_order" jdbcType="INTEGER" property="sortOrder" />
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
   </resultMap>
+
+  <select id="getList" resultMap="BaseResultMap">
+    SELECT p.*,pt.cate_name cateName FROM products p
+    LEFT JOIN product_type pt ON p.cid = pt.id
+    WHERE p.union_id = #{unionId} AND p.is_delete = 0
+    <if test="isShow != null">
+      AND p.is_show = #{isShow}
+    </if>
+    <if test="isRecommend != null">
+      AND p.is_recommend = #{isRecommend}
+    </if>
+  </select>
+
 </mapper>

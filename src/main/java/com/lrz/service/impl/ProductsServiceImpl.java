@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 
 /**
  * Created by CodeGenerator on 2018/08/28.
@@ -15,7 +17,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Service
 @Transactional
 public class ProductsServiceImpl extends AbstractService<Products> implements ProductsService {
+
+    private final ProductsMapper productsMapper;
+
     @Autowired
-    private ProductsMapper productsMapper;
+    public ProductsServiceImpl(ProductsMapper productsMapper) {
+        this.productsMapper = productsMapper;
+    }
+
+    public List<Products> getList(String unionId, Integer cid, Integer isShow, Integer isRecommend){
+        return productsMapper.getList(unionId, cid, isShow, isRecommend);
+    }
 
 }

@@ -1,9 +1,12 @@
 package com.lrz.controller.mp;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
+import com.lrz.model.ProductSpecification;
+import com.lrz.model.ProductType;
 import com.lrz.model.Products;
 import com.lrz.service.ProductSpecificationService;
 import com.lrz.service.ProductTypeService;
@@ -52,5 +55,23 @@ public class MpProductController extends MpBaseController{
         }
         PageInfo pageInfo = new PageInfo<>(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    @GetMapping("/detail")
+    public Result detail(@RequestParam(defaultValue = "0") Integer id) {
+        Products products = productsService.findById(id);
+        if (products != null && this.unionId.equals(products.getUnionId())) {
+            ProductType productType = productTypeService.findById(products.getCid());
+            Condition condition = new Condition(ProductSpecification.class);
+            condition.createCriteria().andEqualTo("productId", id);
+            condition.and().andEqualTo("isDelete", 0);
+            condition.orderBy("id ASC");
+            List<ProductSpecification> specifications = productSpecificationService.findByCondition(condition);
+            products.setCatePid(productType.getPid());
+            products.setSpecifications(JSON.toJSONString(specifications));
+            return ResultGenerator.genSuccessResult(products);
+        } else {
+            return ResultGenerator.genFailResult("产品不存在");
+        }
     }
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lrz.dao.TbkItemMapper">
+  <resultMap id="BaseResultMap" type="com.lrz.model.TbkItem">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="item_id" jdbcType="VARCHAR" property="itemId" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="item_picture" jdbcType="VARCHAR" property="itemPicture" />
+    <result column="item_address" jdbcType="VARCHAR" property="itemAddress" />
+    <result column="item_cate" jdbcType="VARCHAR" property="itemCate" />
+    <result column="item_tbk_address" jdbcType="VARCHAR" property="itemTbkAddress" />
+    <result column="item_price" jdbcType="VARCHAR" property="itemPrice" />
+    <result column="item_sales" jdbcType="VARCHAR" property="itemSales" />
+    <result column="item_ratio" jdbcType="VARCHAR" property="itemRatio" />
+    <result column="item_commission" jdbcType="VARCHAR" property="itemCommission" />
+    <result column="item_wangwang" jdbcType="VARCHAR" property="itemWangwang" />
+    <result column="item_saler_id" jdbcType="VARCHAR" property="itemSalerId" />
+    <result column="item_store_name" jdbcType="VARCHAR" property="itemStoreName" />
+    <result column="item_platform" jdbcType="VARCHAR" property="itemPlatform" />
+    <result column="item_coupon_id" jdbcType="VARCHAR" property="itemCouponId" />
+    <result column="item_coupon_total" jdbcType="VARCHAR" property="itemCouponTotal" />
+    <result column="item_coupon_remain" jdbcType="VARCHAR" property="itemCouponRemain" />
+    <result column="item_coupon_value" jdbcType="VARCHAR" property="itemCouponValue" />
+    <result column="item_coupon_start" jdbcType="VARCHAR" property="itemCouponStart" />
+    <result column="item_coupon_end" jdbcType="VARCHAR" property="itemCouponEnd" />
+    <result column="item_coupon_link" jdbcType="VARCHAR" property="itemCouponLink" />
+    <result column="item_coupon_address" jdbcType="VARCHAR" property="itemCouponAddress" />
+  </resultMap>
+</mapper>

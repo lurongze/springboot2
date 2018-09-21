@@ -6,6 +6,8 @@ import com.lrz.core.Result;
 import com.lrz.core.ResultGenerator;
 import com.lrz.model.TbkItem;
 import com.lrz.service.TbkItemService;
+import com.lrz.utils.HttpResult;
+import com.lrz.utils.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Condition;
@@ -57,9 +59,22 @@ public class MpTbkItemController {
         String orderBy = "id ASC";
         PageHelper.startPage(page, size, orderBy);
         Condition condition = new Condition(TbkItem.class);
+        condition.and().andEqualTo("itemPlatform", "淘宝");
         List<TbkItem> list = tbkItemService.findByCondition(condition);
         PageInfo pageInfo = new PageInfo<>(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    @GetMapping("/viewDetail")
+    public Result viewDetail(@RequestParam(defaultValue = "0") String id){
+        try {
+            HttpResult res = HttpUtil.httpDoGet("http://localhost:8082/getTbkItem/" + id, null,null );
+            String result = res.getBody();
+            return ResultGenerator.genSuccessResult(result);
+        } catch (Exception e) {
+            System.out.println("result:1");
+            return ResultGenerator.genFailResult(e.toString());
+        }
     }
 
     /**

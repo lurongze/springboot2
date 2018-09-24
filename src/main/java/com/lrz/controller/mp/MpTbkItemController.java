@@ -74,23 +74,28 @@ public class MpTbkItemController {
     }
 
     @GetMapping("/viewDetail")
-    public Result viewDetail(@RequestParam(defaultValue = "0") String id){
+    public Result viewDetail(@RequestParam(defaultValue = "0") String id, @RequestParam(defaultValue = "淘宝") String platform){
 
         Condition condition = new Condition(TbkItemInfo.class);
         condition.createCriteria().andEqualTo("itemId", id);
         List<TbkItemInfo> list = tbkItemInfoService.findByCondition(condition);
         if (list != null && list.size() > 0) {
             TbkItemInfo item = list.get(0);
-            return ResultGenerator.genSuccessResult(item.getItemImages());
+            if (!"Not Found".equals(item.getItemImages())) {
+                return ResultGenerator.genSuccessResult(item.getItemImages());
+            }
         }
 
         try {
-            HttpResult res = HttpUtil.httpDoGet("http://localhost:8082/getTbkItem/" + id, null,null );
+            String action = "淘宝".equals(platform) ? "getTbkItem" : "getTmallItem";
+            HttpResult res = HttpUtil.httpDoGet("http://localhost:8082/" + action + "/" + id, null,null );
             String result = res.getBody();
-            TbkItemInfo newItem = new TbkItemInfo();
-            newItem.setItemId(id);
-            newItem.setItemImages(result);
-            tbkItemInfoService.save(newItem);
+            if (!"Not Found".equals(result)) {
+                TbkItemInfo newItem = new TbkItemInfo();
+                newItem.setItemId(id);
+                newItem.setItemImages(result);
+                tbkItemInfoService.save(newItem);
+            }
             return ResultGenerator.genSuccessResult(result);
         } catch (Exception e) {
             System.out.println("result:1");

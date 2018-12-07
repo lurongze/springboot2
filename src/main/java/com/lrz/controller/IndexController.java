@@ -31,6 +31,11 @@ public class IndexController extends BaseController{
         return "list-action";
     }
 
+    @GetMapping("/dva-data")
+    public Result dvaData() {
+        return ResultGenerator.genSuccessResult("dva-data");
+    }
+
     @GetMapping("/http-test")
     public Result httpTest() {
         String res = "";
